@@ -17,6 +17,7 @@
             <div class="title">Register</div>
             <div class="content">
                <form:form action="/register" method="post" modelAttribute="newUser">
+               		<form:input type="hidden" path="role" value="SUBMITTER"/>
                     <div class="user-details">
                         <div class="input-box">
                             <p class="details">
@@ -35,14 +36,14 @@
                         <div class="input-box">
                             <p class="details">
 	                            Password:
-	                            <form:input path="password" placeholder="Enter your password" />
+	                            <form:password path="password" placeholder="Enter your password" />
 								<form:errors path="password" />
                             </p>
                         </div>
                         <div class="input-box">
                             <p class="details">
 	                            Confirm Password:
-	                            <form:input path="confirm" placeholder="Confirm your password" />
+	                            <form:password path="confirm" placeholder="Confirm your password" />
 								<form:errors path="confirm" />
                             </p>
                         </div>

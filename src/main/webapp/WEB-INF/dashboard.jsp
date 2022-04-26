@@ -8,7 +8,7 @@
   <head>
     <meta charset="UTF-8">
     <title> Dashboard </title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="/CSS/dashboard.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,7 +81,7 @@
           </a>
         </li> -->
         <li class="log_out">
-          <a href="#">
+          <a href="/logout">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
