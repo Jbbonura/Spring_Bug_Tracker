@@ -62,27 +62,8 @@
           <span class="links_name">Team</span>
         </a>
       </li>
-      <!--********************ADDITIONAL LINKS IF NEEDED*****************************-->
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-message' ></i>
-          <span class="links_name">Messages</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-heart' ></i>
-          <span class="links_name">Favrorites</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-cog' ></i>
-          <span class="links_name">Setting</span>
-        </a>
-      </li> -->
       <li class="log_out">
-        <a href="#">
+        <a href="/logout">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
@@ -278,82 +259,21 @@
       
       <div class="top-sales box">
         <div class="table-header">
-        <div class="title">Ticket Attachements</div>
-        
-        <div class="search-box">
-          <i class='bx bx-search' ></i>
-          <input id='myInput' onkeyup='searchTable()' type='text' placeholder="Search">
-        </div>
-      </div>
-        <div style="overflow-x:auto;" class="ticket-comments">
-          <table style="width: 100%;" class="table-content"  id="commenttable">
-              <thead>
-                  <tr class="table100-head">
-                      <th style="width:25%;"class="column1">Commenter</th>
-                      <th style="width:50%;" class="column2">Message</th>
-                      <th style="width:25%;" class="column3">Created</th>
-                  </tr>  
-              </thead>
-              <tbody>
-                <!-- <c:forEach var="comment" items="${comments}"> -->
-                <tr>
-        <!-- <td ><c:out value="${comment.name }"/> </td> -->
-        <td >Demo Dev </td>
-        <!-- <td><c:out value="${comment.comment }" /></td> -->
-        <td>Some comment goes here</td>
-        <!-- <td><c:out value="${comment.created_at }" /></td> -->
-        <td>20210426</td>
-        <!-- <td>
-        <div class="edit-action"> <div class="edit-button"><a class="edit-action2" href="/expenses/edit/${expense.id }">Edit</a> </div></div>
-        
-        <form action="/expenses/delete/${expense.id}" method="post">
-          <input type="hidden" name="_method" value="delete"> 
-            <div class="button-small">
-                      <input type="submit" value="Delete">
-                    </div>
-        </form></td> -->
-      </tr>
-                </c:forEach>
-              </tbody>
-          </table>
-          <script>
-            function searchTable() {
-                var input, filter, found, table, tr, td, i, j;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                table = document.getElementById("commenttable");
-                tr = table.getElementsByTagName("tr");
-                for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td");
-                    for (j = 0; j < td.length; j++) {
-                        if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            found = true;
-                        }
-                    }
-                    if (found) {
-                        tr[i].style.display = "";
-                        found = false;
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-            </script>
-            <div class="upload-box">
-              <form method="post" enctype="multipart/form-data">
-                <div>
-                  <label for="image_uploads">Choose file to upload</label>
-                  <input type="file" id="file" name="file" multiple>
-                </div>
-                <div class="preview">
-                  <p>No files currently selected for upload</p>
-                </div>
-                <div>
-                  <button>Submit</button>
-                </div>
-              </form>
-            </div>
-        </div>
+        	<div class="title">Add Comment</div>
+      	</div>
+        <form:form action="/comment/new" method="post" modelAttribute="comment">
+        <form:hidden path="manager" value=""/>
+        	<div class="input-box">
+            	<p>
+                 Comment:
+                 <form:errors path="comment" />
+                 <form:textarea rows="5" cols="40" wrap="soft" path="comment" />
+            	 </p>
+        	 </div>
+        	<div class="button">
+	           <input type="submit" value="Submit">
+	        </div>
+        </form:form>   
       </div>
     </div>
   </div>
