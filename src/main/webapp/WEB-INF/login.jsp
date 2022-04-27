@@ -39,7 +39,7 @@
                 </form:form>
                 <div class="login-signup">
                     <span class="text">No Account?
-                        <a href="#" class="text signup-link">Register now</a>
+                        <a href="/register" class="text signup-link">Register now</a>
                     </span>
                 </div>
  			</div>

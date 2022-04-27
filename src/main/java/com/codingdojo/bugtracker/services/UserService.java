@@ -91,6 +91,11 @@ public class UserService {
 			return userRepo.findAll();
 		}
 		
+		//read with allowed permessions
+		public List<User> getUsersWithPermission(int role) {
+			return userRepo.getUserWhereIdLessThan(role);
+		}
+		
 	//DELETE
 		public void deleteUser(Long id) {
 			userRepo.deleteById(id);

@@ -106,16 +106,15 @@
 
     <div class="home-content">
       <div class="container">
-        <div class="title">Create a Ticket</div>
+        <div class="title">Create a Project</div>
         <div class="content">
-            <form:form action="/ticket/new" method="post" modelAttribute="newTicket">
-            	<form:hidden path="submitter" value="${user_id}"/>
+            <form:form action="/project/new" method="post" modelAttribute="newProject">
                 <div class="user-details">
                     <div class="input-box">
                       	<p>
-                      		Title:
-                      		<form:errors path="title"/>
-                      		<form:input path="title"/>
+                      		Name:
+                      		<form:errors path="name"/>
+                      		<form:input path="name"/>
                   	  	</p>
                   	</div>
                     
@@ -128,11 +127,11 @@
                     </div>
                     <div class="input-box">
                         <p>
-                            Project:
-                            <form:errors path="project" />
-                            <form:select path="project">
-                            	<c:forEach var="project" items="${projects}">
-                            		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
+                            Manager:
+                            <form:errors path="manager" />
+                            <form:select path="manager">
+                            	<c:forEach var="user" items="${users}">
+                            		<form:option value="${user.id}"><c:out value="${user.name}"></c:out></form:option>
                             	</c:forEach>
                             </form:select>
                          

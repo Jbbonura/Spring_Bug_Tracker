@@ -17,7 +17,7 @@
             <div class="title">Register</div>
             <div class="content">
                <form:form action="/register" method="post" modelAttribute="newUser">
-               		<form:input type="hidden" path="role" value="SUBMITTER"/>
+               		<form:input type="hidden" path="role" value="3"/>
                     <div class="user-details">
                         <div class="input-box">
                             <p class="details">

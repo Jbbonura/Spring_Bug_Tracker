@@ -49,6 +49,7 @@ public class userController {
 		//if no errors add to session
 		session.setAttribute("user_id", user.getId());
 		session.setAttribute("user_role", user.getRole());
+		session.setAttribute("user_name", user.getName());
 		return "redirect:/";
 		
 	}
@@ -75,6 +76,7 @@ public class userController {
 		else {
 			session.setAttribute("user_id", registeredUser.getId());
 			session.setAttribute("user_role", registeredUser.getRole());
+			session.setAttribute("user_name", registeredUser.getName());
 			return "redirect:/";
 		}
 	}
@@ -83,6 +85,7 @@ public class userController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("user_id");
 		session.removeAttribute("user_role");
+		session.removeAttribute("user_name");
 		return "redirect:/login";
 		
 	}

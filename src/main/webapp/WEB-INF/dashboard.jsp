@@ -17,7 +17,7 @@
   <div class="sidebar">
     <div class="logo-details">
         <i class='bx bx-user' ></i>
-      <span class="logo_name">Welcome,</span>  <!--add session name-->
+      <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
       <ul class="nav-links">
         <li>
@@ -94,14 +94,27 @@
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
-      
+      <c:if test = "${user_role == 0}">
+      	<a href="/project/new">New Project</a>
+      </c:if>
+      <a href="/ticket/new">New Ticket</a>
       <div class="profile-details">
         <!--<img src="images/profile.jpg" alt="">-->
-        <span class="admin_name">Demo Admin</span>
-        
+        <c:if test="${user_role == 3}">
+        	<span class="admin_name">Logged in as a Submitter</span>
+        </c:if>
+  		<c:if test="${user_role == 2}">
+        	<span class="admin_name">Logged in as a Developer</span>
+        </c:if>
+        <c:if test="${user_role == 1}">
+        	<span class="admin_name">Logged in as a Project Manager</span>
+        </c:if>
+        <c:if test="${user_role == 0}">
+        	<span class="admin_name">Logged in as an Admin</span>
+        </c:if>
       </div>
     </nav>
-
+    
     <div class="home-content">
       <div class="overview-boxes">
         <div class="box">

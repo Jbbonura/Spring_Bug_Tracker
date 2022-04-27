@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +20,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -51,17 +50,10 @@ public class User {
 	@NotNull(message="Confirm Password is required.")
 	private String confirm;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name="role")
-	private Role role;
+	@Max(3)
+	private int role;
 	
-	//ROLE CLASS?
-	public enum Role {
-			ADMIN,
-			PROJECT_MANAGER,
-			DEVELOPER,
-			SUBMITTER;		
-	}
+	
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -121,7 +113,7 @@ public class User {
 			@NotNull(message = "Name is required.") @Size(min = 1, max = 45, message = "Name cannot be more than 45 characters.") String name,
 			@NotNull(message = "Email is required.") @Email(message = "Please enter a valid email") String email,
 			@NotNull(message = "Password is required.") @Size(min = 8, max = 128, message = "Password must be between 8 and 128 characters") String password,
-			@NotNull(message = "Confirm Password is required.") String confirm, Role role) {
+			@NotNull(message = "Confirm Password is required.") String confirm, int role) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -170,11 +162,11 @@ public class User {
 		this.confirm = confirm;
 	}
 
-	public Role getRole() {
+	public int getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 
