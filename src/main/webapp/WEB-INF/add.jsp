@@ -62,27 +62,8 @@
           <span class="links_name">Team</span>
         </a>
       </li>
-      <!--********************ADDITIONAL LINKS IF NEEDED*****************************-->
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-message' ></i>
-          <span class="links_name">Messages</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-heart' ></i>
-          <span class="links_name">Favrorites</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-cog' ></i>
-          <span class="links_name">Setting</span>
-        </a>
-      </li> -->
       <li class="log_out">
-        <a href="#">
+        <a href="/logout">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
@@ -138,13 +119,51 @@
                          
                         </p>
                     </div>
+                    
+                    <div class="input-box">
+                        <p>
+                            Ticket Priority:
+                            <form:errors path="priority" />
+                            <form:select path="priority">
+                            	<c:forEach var="priority" items="${projects}">
+                            		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
+                            	</c:forEach>
+                            </form:select>
+                         
+                        </p>
+                    </div>
+                    <div class="input-box">
+                        <p>
+                            Ticket Status:
+                            <form:errors path="ticketStatus" />
+                            <form:select path="ticketStatus">
+                            	<c:forEach var="priority" items="${projects}">
+                            		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
+                            	</c:forEach>
+                            </form:select>
+                         
+                        </p>
+                    </div>
+                    <div class="input-box">
+                        <p>
+                            Ticket Type:
+                            <form:errors path="ticketType" />
+                            <form:select path="ticketType">
+                            	<c:forEach var="priority" items="${projects}">
+                            		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
+                            	</c:forEach>
+                            </form:select>
+                         
+                        </p>
+                    </div>
                 </div>
                     <div class="button">
                     <input type="submit" value="Submit">
+                    <a href="/">Cancel</a> 
                 </div>
             </form:form>  
             
-            <a href="/">Cancel</a>   
+              
             
         </div>
     </div>
