@@ -34,4 +34,16 @@ public class ProjectService {
 		public void deleteProject(Long id) {
 			projectRepo.deleteById(id);
 		}
+		
+	//GET COUNT
+		public int projectCount() {
+			//fetch all projects
+			List<Project> projects = getAllProjects();
+			//count number of projects
+			int count = 0;
+			for(Project project : projects) {
+				count++;
+			}
+			return count;
+		}
 }

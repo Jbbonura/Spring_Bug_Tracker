@@ -117,10 +117,11 @@
     
     <div class="home-content">
       <div class="overview-boxes">
-        <div class="box">
+      <c:if test="${user_role == 0}">
+      	<div class="box">
           <div class="right-side">
-            <div class="box-topic">Active Projects</div>
-            <div class="number">0</div> <!--NEED TO ADD COUNTER, ADD NEW ICON-->
+            <div class="box-topic">Total Projects</div>
+            <div class="number"><c:out value="${projectCount}"/></div> <!--NEED TO ADD COUNTER, ADD NEW ICON-->
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Some performance metric</span>
@@ -130,8 +131,8 @@
         </div>
         <div class="box">
           <div class="right-side">
-            <div class="box-topic">Total Tickets</div>
-            <div class="number">8</div>
+            <div class="box-topic">Total Open Tickets</div>
+            <div class="number"><c:out value="${openTicketCount}"/></div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Some performance metric</span>
@@ -141,8 +142,8 @@
         </div>
         <div class="box">
           <div class="right-side">
-            <div class="box-topic">Unassigned Tickets</div>
-            <div class="number">2</div>
+            <div class="box-topic">Total Unassigned Tickets</div>
+            <div class="number"><c:out value="${unassignedTicketCount}"/></div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Some performance metric</span>
@@ -161,8 +162,11 @@
           </div>
           <!-- <i class='bx bxs-cart-download cart four' ></i> -->
         </div>
+      </c:if>
+       
+        
       </div>
-
+		
       <div class="sales-boxes">
         <div class="top-sales box">
             <div class="title">Whatever we call this</div>

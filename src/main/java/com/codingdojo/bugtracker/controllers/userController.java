@@ -1,5 +1,7 @@
 package com.codingdojo.bugtracker.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,19 +14,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingdojo.bugtracker.models.LoginUser;
+import com.codingdojo.bugtracker.models.Project;
+import com.codingdojo.bugtracker.models.Ticket.TicketStatus;
 import com.codingdojo.bugtracker.models.User;
+import com.codingdojo.bugtracker.services.ProjectService;
+import com.codingdojo.bugtracker.services.TicketService;
 import com.codingdojo.bugtracker.services.UserService;
 
 @Controller
 public class userController {
 	@Autowired
 	public UserService userServ;
+	@Autowired
+	public ProjectService projectServ;
+	@Autowired
+	public TicketService ticketServ;
 	
 	@RequestMapping("/")
-	public String index(HttpSession session) {
+	public String index(HttpSession session, Model model) {
 		if(session.getAttribute("user_id") == null) {
 			return "redirect:/login";
 		}
+		//dashboard information for ADMINS and SUBMITTERS
+		if(session.getAttribute("user_role").equals(0) || session.getAttribute("user_role").equals(3)) {
+			//get Admin project count and send to jsp
+			int adminProjectCount = projectServ.projectCount();
+			model.addAttribute("projectCount", adminProjectCount);
+			
+			//get Admin open ticket count and send to jsp
+			int adminTicketCount = ticketServ.ticketCount(TicketStatus.OPEN);
+			model.addAttribute("openTicketCount", adminTicketCount);
+			
+			//get Admin new ticket count and send to jsp
+			int adminUnassignedTicketCount = ticketServ.ticketCount(TicketStatus.NEW);
+			model.addAttribute("unassignedTicketCount", adminUnassignedTicketCount);
+		}
+		
 		return "dashboard.jsp";
 	}
 	
