@@ -17,7 +17,7 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-user' ></i>
-      <span class="logo_name">Welcome,</span>  <!--add session name-->
+      <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
     <ul class="nav-links">
       <li>
@@ -81,7 +81,21 @@
       
       <div class="profile-details">
         <!--<img src="images/profile.jpg" alt="">-->
-        <span class="admin_name">Demo Dev</span>
+        <div class="profile-details">
+        <!--<img src="images/profile.jpg" alt="">-->
+        <c:if test="${user_role == 3}">
+        	<span class="admin_name">Logged in as a Submitter</span>
+        </c:if>
+  		<c:if test="${user_role == 2}">
+        	<span class="admin_name">Logged in as a Developer</span>
+        </c:if>
+        <c:if test="${user_role == 1}">
+        	<span class="admin_name">Logged in as a Project Manager</span>
+        </c:if>
+        <c:if test="${user_role == 0}">
+        	<span class="admin_name">Logged in as an Admin</span>
+        </c:if>
+      </div>
       </div>
     </nav>
 
@@ -96,22 +110,17 @@
                       	<p>
                       		Title:
                       		<form:errors path="title"/>
-                      		<form:input path="title"/>
+                      		<form:input path="title" required="required"/>
                   	  	</p>
                   	</div>
                     
-                    <div class="input-box">
-                        <p>
-                            Description:
-                            <form:errors path="description" />
-                            <form:textarea rows="5" cols="40" wrap="soft" path="description" />
-                        </p>
-                    </div>
+                    
                     <div class="input-box">
                         <p>
                             Project:
                             <form:errors path="project" />
-                            <form:select path="project">
+                            <form:select path="project" required="required">
+                            	<form:option value="" disabled="">Please select a project</form:option>
                             	<c:forEach var="project" items="${projects}">
                             		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
                             	</c:forEach>
@@ -125,35 +134,31 @@
                             Ticket Priority:
                             <form:errors path="priority" />
                             <form:select path="priority">
-                            	<c:forEach var="priority" items="${projects}">
-                            		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
-                            	</c:forEach>
+                            	<form:option value="0">None</form:option>
+                            	<form:option value="1">Low</form:option>
+                            	<form:option value="2">Medium</form:option>
+                            	<form:option value="3">High</form:option>
                             </form:select>
-                         
                         </p>
                     </div>
-                    <div class="input-box">
-                        <p>
-                            Ticket Status:
-                            <form:errors path="ticketStatus" />
-                            <form:select path="ticketStatus">
-                            	<c:forEach var="priority" items="${projects}">
-                            		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
-                            	</c:forEach>
-                            </form:select>
-                         
-                        </p>
-                    </div>
+       
                     <div class="input-box">
                         <p>
                             Ticket Type:
                             <form:errors path="ticketType" />
                             <form:select path="ticketType">
-                            	<c:forEach var="priority" items="${projects}">
-                            		<form:option value="${project.id}"><c:out value="${project.name}"></c:out></form:option>
+                            	<c:forEach var="type" items="${types}">
+                            		<form:option value="${type}"><c:out value="${type}"></c:out></form:option>
                             	</c:forEach>
                             </form:select>
                          
+                        </p>
+                    </div>
+                    <div class="input-box">
+                        <p>
+                            Description:
+                            <form:errors path="description" />
+                            <form:textarea rows="5" cols="40" wrap="soft" path="description" required="required"/>
                         </p>
                     </div>
                 </div>

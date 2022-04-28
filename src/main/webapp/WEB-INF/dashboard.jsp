@@ -117,52 +117,100 @@
     
     <div class="home-content">
       <div class="overview-boxes">
-      <c:if test="${user_role == 0}">
-      	<div class="box">
-          <div class="right-side">
-            <div class="box-topic">Total Projects</div>
-            <div class="number"><c:out value="${projectCount}"/></div> <!--NEED TO ADD COUNTER, ADD NEW ICON-->
-            <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Some performance metric</span>
-            </div>
-          </div>
-          <!-- <i class='bx bx-cart-alt cart'></i> -->
-        </div>
-        <div class="box">
-          <div class="right-side">
-            <div class="box-topic">Total Open Tickets</div>
-            <div class="number"><c:out value="${openTicketCount}"/></div>
-            <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Some performance metric</span>
-            </div>
-          </div>
-          <!-- <i class='bx bxs-cart-add cart two' ></i> -->
-        </div>
-        <div class="box">
-          <div class="right-side">
-            <div class="box-topic">Total Unassigned Tickets</div>
-            <div class="number"><c:out value="${unassignedTicketCount}"/></div>
-            <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Some performance metric</span>
-            </div>
-          </div>
-          <!-- <i class='bx bx-cart cart three' ></i> -->
-        </div>
-        <div class="box">
-          <div class="right-side">
-            <div class="box-topic">Analytics</div>
-            <div class="number">11</div>
-            <div class="indicator">
-              <i class='bx bx-down-arrow-alt down'></i>
-              <span class="text">Some performance metric</span>
-            </div>
-          </div>
-          <!-- <i class='bx bxs-cart-download cart four' ></i> -->
-        </div>
-      </c:if>
+      <c:choose>
+	      <c:when test="${user_role == 0 || user_role == 3}">
+	      	<div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">Total Projects</div>
+	            <div class="number"><c:out value="${projectCount}"/></div> <!--NEED TO ADD COUNTER, ADD NEW ICON-->
+	            <div class="indicator">
+	              <i class='bx bx-up-arrow-alt'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bx-cart-alt cart'></i> -->
+	        </div>
+	        <div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">Total Unresolved Tickets</div>
+	            <div class="number"><c:out value="${openTicketCount}"/></div>
+	            <div class="indicator">
+	              <i class='bx bx-up-arrow-alt'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bxs-cart-add cart two' ></i> -->
+	        </div>
+	        <div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">Total Unassigned Tickets</div>
+	            <div class="number"><c:out value="${unassignedTicketCount}"/></div>
+	            <div class="indicator">
+	              <i class='bx bx-up-arrow-alt'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bx-cart cart three' ></i> -->
+	        </div>
+	        <div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">Unresolved Tickets Submitted By You</div>
+	            <div class="number"><c:out value="${submittedTicketCount}"/></div>
+	            <div class="indicator">
+	              <i class='bx bx-down-arrow-alt down'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bxs-cart-download cart four' ></i> -->
+	        </div>
+	      </c:when>
+	      <c:otherwise>
+	      		<div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">My Projects</div>
+	            <div class="number"><c:out value="${projectCount}"/></div> <!--NEED TO ADD COUNTER, ADD NEW ICON-->
+	            <div class="indicator">
+	              <i class='bx bx-up-arrow-alt'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bx-cart-alt cart'></i> -->
+	        </div>
+	        <div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">My Unresolved Tickets</div>
+	            <div class="number"><c:out value="${openTicketCount}"/></div>
+	            <div class="indicator">
+	              <i class='bx bx-up-arrow-alt'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bxs-cart-add cart two' ></i> -->
+	        </div>
+	        <div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">My Resolved Tickets</div>
+	            <div class="number"><c:out value="${resolvedTicketCount}"/></div>
+	            <div class="indicator">
+	              <i class='bx bx-up-arrow-alt'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bx-cart cart three' ></i> -->
+	        </div>
+	        <div class="box">
+	          <div class="right-side">
+	            <div class="box-topic">My Submitted Unresolved Tickets</div>
+	            <div class="number"><c:out value="${submittedTicketCount}"/></div>
+	            <div class="indicator">
+	              <i class='bx bx-down-arrow-alt down'></i>
+	              <span class="text">Some performance metric</span>
+	            </div>
+	          </div>
+	          <!-- <i class='bx bxs-cart-download cart four' ></i> -->
+	        </div>
+	      </c:otherwise>
+	   </c:choose>
        
         
       </div>
