@@ -13,6 +13,14 @@ import com.codingdojo.bugtracker.models.Ticket.TicketStatus;
 public interface TicketRepository extends CrudRepository<Ticket, Long>{
 	List<Ticket> findAll();
 	
-	@Query("SELECT t FROM Ticket t WHERE ticketStatus = ?1")
+	@Query("SELECT t FROM Ticket t WHERE ticketStatus IS NOT ?1")
+	List<Ticket> findTicketNotByStatus(TicketStatus status);
+	
+	@Query("Select t FROM Ticket t WHERE ticketStatus = ?1")
 	List<Ticket> findTicketByStatus(TicketStatus status);
+	
+	@Query("SELECT t FROM Ticket t WHERE ticketStatus IS NOT ?1 AND submitter_id = ?2")
+	List<Ticket> findTicketByStatusAndId(TicketStatus status, Long id);
+	
 }
+

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.codingdojo.bugtracker.models.LoginUser;
+import com.codingdojo.bugtracker.models.Project;
+import com.codingdojo.bugtracker.models.Ticket;
+import com.codingdojo.bugtracker.models.Ticket.TicketStatus;
 import com.codingdojo.bugtracker.models.User;
 import com.codingdojo.bugtracker.repositories.UserRepository;
 
@@ -96,8 +99,87 @@ public class UserService {
 			return userRepo.getUserWhereIdLessThan(role);
 		}
 		
+		//read users assigned projects
+		public List<Project> getUsersAssignedProjects(Long id) {
+			User user = getOneUser(id);
+			return user.getAssignedProjects();
+		}
+		
+		//read users managed projects
+		public List<Project> getUsersManagedProjects(Long id) {
+			User user = getOneUser(id);
+			return user.getManagedProjects();
+		}
+		
 	//DELETE
 		public void deleteUser(Long id) {
 			userRepo.deleteById(id);
+		}
+		
+	//Count users assigned and managed projects
+		public int countUsersProjects(Long id) {
+			//fetch users projects 
+			List<Project> userAssigned = getUsersAssignedProjects(id);
+			List<Project> userManaged = getUsersManagedProjects(id);
+			
+			//count the projects
+			int count = 0;
+			for (Project project : userAssigned) {
+				count++;
+			}
+			for (Project project : userManaged) {
+				count++;
+			}
+			return count;
+		}
+	//Retrieve users unresolved tickets
+		public List<Ticket> unresolvedAssignedTickets(Long id){
+			//fetch users tickets
+			User user = getOneUser(id);
+			List<Ticket> assignedTickets = user.getAssignedTickets(); 
+			int index = 0;
+			for (Ticket ticket : assignedTickets) {
+				if (ticket.getTicketStatus() == TicketStatus.RESOLVED) {
+					assignedTickets.remove(index);
+				}
+				index++;
+			}
+			return assignedTickets;
+		}
+	//Count of unresolved tickets
+		public int unresolvedAssignedTicketCount(Long id){
+			List<Ticket> assignedTickets = unresolvedAssignedTickets(id);
+			int count = 0;
+			for (Ticket ticket : assignedTickets) {
+				count++;
+			}
+			return count;
+		}
+		
+		//retreive users resolved tickets
+		public List<Ticket> resolvedAssignedTickets(Long id) {
+			//fetch users tickets
+			User user = getOneUser(id);
+			List<Ticket> assignedTickets = user.getAssignedTickets();
+			
+			//remove all tickets not finished
+			int index = 0;
+			for(Ticket ticket : assignedTickets) {
+				if (ticket.getTicketStatus() != TicketStatus.RESOLVED) {
+					assignedTickets.remove(index);
+				}
+				index++;
+			}
+			return assignedTickets;
+		}
+		
+		//Count resolved tickets
+		public int resolvedAssignedTicketCount(Long id) {
+			List<Ticket> assignedTickets = resolvedAssignedTickets(id);
+			int count = 0;
+			for (Ticket ticket : assignedTickets) {
+				count++;
+			}
+			return count;
 		}
 }

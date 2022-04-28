@@ -17,7 +17,7 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-user' ></i>
-      <span class="logo_name">Welcome,</span>  <!--add session name-->
+      <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
     <ul class="nav-links">
       <li>
@@ -63,7 +63,7 @@
         </a>
       </li>
       <li class="log_out">
-        <a href="#">
+        <a href="/logout">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
@@ -81,7 +81,18 @@
       
       <div class="profile-details">
         <!--<img src="images/profile.jpg" alt="">-->
-        <span class="admin_name">Demo Dev</span>
+        <c:if test="${user_role == 3}">
+        	<span class="admin_name">Logged in as a Submitter</span>
+        </c:if>
+  		<c:if test="${user_role == 2}">
+        	<span class="admin_name">Logged in as a Developer</span>
+        </c:if>
+        <c:if test="${user_role == 1}">
+        	<span class="admin_name">Logged in as a Project Manager</span>
+        </c:if>
+        <c:if test="${user_role == 0}">
+        	<span class="admin_name">Logged in as an Admin</span>
+        </c:if>
       </div>
     </nav>
 

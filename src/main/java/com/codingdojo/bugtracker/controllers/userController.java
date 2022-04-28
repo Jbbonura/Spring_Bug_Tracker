@@ -42,13 +42,31 @@ public class userController {
 			model.addAttribute("projectCount", adminProjectCount);
 			
 			//get Admin open ticket count and send to jsp
-			int adminTicketCount = ticketServ.ticketCount(TicketStatus.OPEN);
+			int adminTicketCount = ticketServ.ticketCount();
 			model.addAttribute("openTicketCount", adminTicketCount);
 			
 			//get Admin new ticket count and send to jsp
 			int adminUnassignedTicketCount = ticketServ.ticketCount(TicketStatus.NEW);
 			model.addAttribute("unassignedTicketCount", adminUnassignedTicketCount);
+			
 		}
+		else {
+			//get project count and send to jsp
+			int projectCount = userServ.countUsersProjects((Long) session.getAttribute("user_id"));
+			model.addAttribute("projectCount", projectCount);
+			
+			//get unresolved ticket count and send to jsp
+			int ticketCount = userServ.unresolvedAssignedTicketCount((Long) session.getAttribute("user_id"));
+			model.addAttribute("openTicketCount", ticketCount);
+			
+			//get resolved ticket count and send to jsp
+			int resolvedTicketCount = userServ.resolvedAssignedTicketCount((Long) session.getAttribute("user_id"));
+			model.addAttribute("resolvedTicketCount", resolvedTicketCount);
+			
+		}
+		//get count of tickets submitted by user that are still open
+		int submittedTicketCount = ticketServ.ticketCount(TicketStatus.RESOLVED, (Long) session.getAttribute("user_id"));
+		model.addAttribute("submittedTicketCount", submittedTicketCount);
 		
 		return "dashboard.jsp";
 	}

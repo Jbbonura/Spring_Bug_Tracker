@@ -32,18 +32,35 @@ public class TicketService {
 		}
 		
 		//read with specific status
-		public List<Ticket> getTicketByStatus(TicketStatus status){
+		public List<Ticket> getTicketNotByStatus(TicketStatus status){
+			return ticketRepo.findTicketNotByStatus(status);
+		}
+		public List<Ticket> getTicketByStatusAndId(TicketStatus status, Long id){
+			return ticketRepo.findTicketByStatusAndId(status, id);
+		}
+		public List<Ticket> getTicketByStatus(TicketStatus status) {
 			return ticketRepo.findTicketByStatus(status);
 		}
-		
 	//DELETE
 		public void deleteTicket(Long id) {
 			ticketRepo.deleteById(id);
 		}
 		
 	//GET COUNT
+		public int ticketCount() {
+			//fetch all unresolved tickets
+			List<Ticket> tickets = getTicketNotByStatus(TicketStatus.RESOLVED);
+			
+			//count number of tickets
+			int count = 0;
+			for(Ticket ticket : tickets) {
+				count++;
+			}
+			return count;
+		}
+		
 		public int ticketCount(TicketStatus status) {
-			//fetch all open tickets
+			//fetch all new tickets
 			List<Ticket> tickets = getTicketByStatus(status);
 			
 			//count number of tickets
@@ -52,5 +69,18 @@ public class TicketService {
 				count++;
 			}
 			return count;
+		}
+		
+		public int ticketCount(TicketStatus status, Long id) {
+			//fetch all tickets with matching status and submitter
+			List<Ticket> tickets = getTicketByStatusAndId(status, id);
+			
+			//count number of tickets
+			int count = 0;
+			for(Ticket ticket : tickets) {
+				count++;
+			}
+			return count;
+			
 		}
 }	

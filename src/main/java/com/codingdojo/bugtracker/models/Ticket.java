@@ -23,6 +23,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -38,17 +39,17 @@ public class Ticket {
 	private String title;
 	
 		//set up description with type text?
-	@NotNull(message="Description is required.")
+	@NotEmpty(message="Description is required.")
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	
-	@NotEmpty(message="Priority is requried.")
+	@NotNull(message="Priority is requried.")
 	@Max(4)
 	private int priority;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="ticketStatus")
-	private TicketStatus ticketStatus;
+	@Column(name="ticketStatus", columnDefinition="default 'NEW'")
+	private TicketStatus ticketStatus = TicketStatus.NEW;
 	
 	public enum TicketStatus {
 		NEW,
