@@ -243,7 +243,7 @@
             <li>
               <a href="#">
                 <!--<img src="images/scarves.jpg" alt="">-->
-                <span class="product">TOtal Developers</span>
+                <span class="product">Total Developers</span>
               </a>
               <span class="price">0</span>
             </li>
