@@ -277,7 +277,7 @@ nav .profile-details i{
   text-decoration: none;
 }
 .sales-boxes .box .button{
-  width: 100%;
+  width: 85%;
   display: flex;
   justify-content: flex-end;
 }
@@ -404,7 +404,7 @@ form .button{
 }
 form .button input{
     height: 100%;
-    width: 100%;
+    width: 85%;
     border-radius: 5px;
     border: none;
     color: #fff;

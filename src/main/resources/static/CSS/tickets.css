@@ -369,6 +369,57 @@ nav .profile-details i{
     margin-top: 30px;
 }
 
+
+.table-content{
+    padding: 5px;
+    text-align: left;
+    
+}
+
+.table-content td{
+	border-bottom: 1px solid #fff;
+    color: #fff;
+    border-top: 1px solid transparent;
+    padding: 8px;
+    background-color: rgb(211, 207, 207);
+}
+
+
+.table.content tr{
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	border: 1px solid transpartent;
+}
+tr:hover {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+  color: #19313c;
+}
+
+a:hover {
+  background-color: #081D45;
+}
+
+.table-content a{
+	text-decoration: none;
+	color: white;
+}
+
+
+.table-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+
+
+
 /* Responsive Media Query */
 @media (max-width: 1240px) {
   .sidebar{
