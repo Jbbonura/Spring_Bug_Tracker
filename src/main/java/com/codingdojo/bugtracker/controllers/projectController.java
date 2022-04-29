@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -66,4 +67,49 @@ public class projectController {
 		
 		}
 	}
+	
+	@RequestMapping("/projects")
+	public String showProjects(
+			HttpSession session,
+			Model model) {
+		
+		//make sure user is logged in
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+		
+		if(session.getAttribute("user_role").equals(0)) {
+			//get all projects
+			List<Project> projects = projectServ.getAllProjects();
+			model.addAttribute("projects", projects);
+		}
+		return "projects.jsp";
+	}
+	
+	@RequestMapping("/project/{id}")
+	public String showProject(
+			@PathVariable("id") Long id,
+			HttpSession session,
+			Model model) {
+		
+		//make sure user is logged in
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+		
+		//get project 
+		Project project = projectServ.getOneProject(id);
+		model.addAttribute("project", project);
+		
+		//get project unresolved ticket count
+		int unresolvedTicketCount = projectServ.unresolvedProjectTicketCount(id);
+		model.addAttribute("unresolvedTicketCount", unresolvedTicketCount);
+		
+		//get project resolved ticket count
+		int resolvedTicketCount = projectServ.resolvedProjectTicketCount(id);
+		model.addAttribute("resolvedTicketCount", resolvedTicketCount);
+		
+		return "project.jsp";
+	}
+	
 }

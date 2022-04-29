@@ -17,11 +17,11 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-user' ></i>
-      <span class="logo_name">Welcome,</span>  <!--add session name-->
+      <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#" class="active">
+        <a href="/">
           <i class='bx bx-grid-alt' ></i>
           <span class="links_name">Dashboard Home</span>
         </a>
@@ -39,13 +39,13 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/projects" class="active">
           <i class='bx bx-pie-chart-alt-2' ></i>
           <span class="links_name">My Projects</span>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/tickets">
           <i class='bx bx-coin-stack' ></i>
           <span class="links_name">My Tickets</span>
         </a>
@@ -81,7 +81,18 @@
       
       <div class="profile-details">
         <!--<img src="images/profile.jpg" alt="">-->
-        <span class="admin_name">Demo Dev</span>
+        <c:if test="${user_role == 3}">
+        	<span class="admin_name">Logged in as a Submitter</span>
+        </c:if>
+  		<c:if test="${user_role == 2}">
+        	<span class="admin_name">Logged in as a Developer</span>
+        </c:if>
+        <c:if test="${user_role == 1}">
+        	<span class="admin_name">Logged in as a Project Manager</span>
+        </c:if>
+        <c:if test="${user_role == 0}">
+        	<span class="admin_name">Logged in as an Admin</span>
+        </c:if>
       </div>
     </nav>
 
@@ -100,35 +111,23 @@
             <table style="width: 100%;" class="table-content"  id="projects-table">
                 <thead>
                     <tr class="table100-head">
-                        <th style="width:10%;"class="column1">Title</th>
-                        <th style="width:15%;" class="column2">Progress</th>
-                        <th style="width:10%;" class="column3">Project Manager</th>
-                        <th style="width:10%;"class="column4">Team</th>
-                        <th style="width:10%;"class="column5">Status</th>
-                        <th style="width:10%;"class="column6">Completion Date</th>
+                        <th style="width:10%;"class="column1">Name</th>
+                        <th style="width:15%;" class="column2">Project Manager</th>
+                        <th style="width:10%;" class="column3">Unresolved Tickets</th>
+                        <th style="width:10%;"class="column4">Resolved Tickets</th>
                         <th style="width:15%;"class="column7">Actions</th>
                     </tr>  
                 </thead>
                 <tbody>
-                  <!-- <c:forEach var="comment" items="${comments}"> -->
-                  <tr>
-          <!-- <td ><c:out value="${comment.name }"/> </td> -->
-          <td >Demo Dev </td>
-          <!-- <td><c:out value="${comment.comment }" /></td> -->
-          <td>Do we have a way to track progress?</td>
-          <!-- <td><c:out value="${comment.created_at }" /></td> -->
-          <td>20210426</td>
-          <!-- <td>
-          <div class="edit-action"> <div class="edit-button"><a class="edit-action2" href="/expenses/edit/${expense.id }">Edit</a> </div></div>
-          
-          <form action="/expenses/delete/${expense.id}" method="post">
-            <input type="hidden" name="_method" value="delete"> 
-              <div class="button-small">
-                        <input type="submit" value="Delete">
-                      </div>
-          </form></td> -->
-        </tr>
-                  </c:forEach>
+                  <c:forEach var="project" items="${projects}">
+         	   	    <tr>
+         				<td><c:out value="${project.name}"/></td>
+         				<td><c:out value="${project.manager.name}"/></td>
+         				<td><c:out value="${project.id}"/></td>
+         				<td><c:out value="${project.id}"/></td>
+         				<td><a href="/project/${project.id}">View</a></td>
+        			</tr>
+        		  </c:forEach>
                 </tbody>
             </table>
             <script>

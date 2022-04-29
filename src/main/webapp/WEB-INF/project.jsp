@@ -17,11 +17,11 @@
   <div class="sidebar">
     <div class="logo-details">
         <i class='bx bx-user' ></i>
-      <span class="logo_name">Welcome,</span>  <!--add session name-->
+      <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
       <ul class="nav-links">
         <li>
-          <a href="#" class="active">
+          <a href="/">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard Home</span>
           </a>
@@ -39,13 +39,13 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/projects">
             <i class='bx bx-pie-chart-alt-2' ></i>
             <span class="links_name">My Projects</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/tickets">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">My Tickets</span>
           </a>
@@ -63,7 +63,7 @@
           </a>
         </li>
         <li class="log_out">
-          <a href="#">
+          <a href="/logout">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -77,7 +77,18 @@
         <span class="dashboard">Details for project ${project.id} </span>
       </div>
       <div class="profile-details">
-        <span class="admin_name">Demo Admin</span>
+      	<c:if test="${user_role == 3}">
+        	<span class="admin_name">Logged in as a Submitter</span>
+        </c:if>
+  		<c:if test="${user_role == 2}">
+        	<span class="admin_name">Logged in as a Developer</span>
+        </c:if>
+        <c:if test="${user_role == 1}">
+        	<span class="admin_name">Logged in as a Project Manager</span>
+        </c:if>
+        <c:if test="${user_role == 0}">
+        	<span class="admin_name">Logged in as an Admin</span>
+        </c:if>
       </div>
     </nav>
 
@@ -115,25 +126,7 @@
                     </tr>  
                 </thead>
                 <tbody>
-                  <!-- <c:forEach var="comment" items="${comments}"> -->
-                  <tr>
-          <!-- <td ><c:out value="${comment.name }"/> </td> -->
-          <td >Demo Dev </td>
-          <!-- <td><c:out value="${comment.comment }" /></td> -->
-          <td>Some comment goes here</td>
-          <!-- <td><c:out value="${comment.created_at }" /></td> -->
-          <td>20210426</td>
-          <!-- <td>
-          <div class="edit-action"> <div class="edit-button"><a class="edit-action2" href="/expenses/edit/${expense.id }">Edit</a> </div></div>
-          
-          <form action="/expenses/delete/${expense.id}" method="post">
-            <input type="hidden" name="_method" value="delete"> 
-              <div class="button-small">
-                        <input type="submit" value="Delete">
-                      </div>
-          </form></td> -->
-        </tr>
-                  </c:forEach>
+                 
                 </tbody>
             </table>  
           </div>
@@ -151,32 +144,16 @@
                   <thead>
                       <tr class="table100-head">
                           <th style="width:15%;"class="column1">Title</th>
-                          <th style="width:15%;" class="column2">Sumbitter</th>
-                          <th style="width:15%;" class="column3">Developer Assiged</th>
+                          <th style="width:15%;" class="column2">Submitter</th>
+                          <th style="width:15%;" class="column3">Assigned Developer</th>
                           <th style="width:15%;"class="column4">Status</th>
                           <th style="width:15%;"class="column5">Created</th>
                       </tr>  
                   </thead>
                   <tbody>
-                    <!-- <c:forEach var="comment" items="${comments}"> -->
-                    <tr>
-            <!-- <td ><c:out value="${comment.name }"/> </td> -->
-            <td >Demo Dev </td>
-            <!-- <td><c:out value="${comment.comment }" /></td> -->
-            <td>Some comment goes here</td>
-            <!-- <td><c:out value="${comment.created_at }" /></td> -->
-            <td>20210426</td>
-            <!-- <td>
-            <div class="edit-action"> <div class="edit-button"><a class="edit-action2" href="/expenses/edit/${expense.id }">Edit</a> </div></div>
-            
-            <form action="/expenses/delete/${expense.id}" method="post">
-              <input type="hidden" name="_method" value="delete"> 
-                <div class="button-small">
-                          <input type="submit" value="Delete">
-                        </div>
-            </form></td> -->
-          </tr>
-                    </c:forEach>
+                    	<c:forEach var="ticket" items="${project.projectsTickets}">
+                    		<td><c:out value="${ticket.title}"/></td>
+                    	</c:forEach>
                   </tbody>
               </table>  
             </div>

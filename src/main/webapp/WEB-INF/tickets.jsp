@@ -41,7 +41,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/projects">
           <i class='bx bx-pie-chart-alt-2' ></i>
           <span class="links_name">My Projects</span>
         </a>

@@ -49,6 +49,7 @@ public class userController {
 			int adminUnassignedTicketCount = ticketServ.ticketCount(TicketStatus.NEW);
 			model.addAttribute("unassignedTicketCount", adminUnassignedTicketCount);
 			
+			
 		}
 		else {
 			//get project count and send to jsp
