@@ -69,6 +69,23 @@ public class userController {
 		int submittedTicketCount = ticketServ.ticketCount(TicketStatus.RESOLVED, (Long) session.getAttribute("user_id"));
 		model.addAttribute("submittedTicketCount", submittedTicketCount);
 		
+		//get count of tickets by type
+		//new
+		int newCount = ticketServ.ticketCount(TicketStatus.NEW);
+		model.addAttribute("newCount", newCount);
+		//open
+		int openCount = ticketServ.ticketCount(TicketStatus.OPEN);
+		model.addAttribute("openCount", openCount);
+		//in progress
+		int inprogressCount = ticketServ.ticketCount(TicketStatus.IN_PROGRESS);
+		model.addAttribute("inprogressCount", inprogressCount);
+		//add info
+		int addInfoCount = ticketServ.ticketCount(TicketStatus.INFO_REQUIRED);
+		model.addAttribute("addInfoCount", addInfoCount);
+		
+		int totalCount = newCount + openCount + inprogressCount+ addInfoCount;
+		model.addAttribute("totalCount", totalCount);
+		
 		return "dashboard.jsp";
 	}
 	

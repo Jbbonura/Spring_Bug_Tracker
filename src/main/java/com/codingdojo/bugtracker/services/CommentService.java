@@ -29,6 +29,11 @@ public class CommentService {
 		public List<Comment> getAllComments() {
 			return commentRepo.findAll();
 		}
+		
+		//read by ticket
+		public List<Comment> getCommentsByTicket(Long id) {
+			return commentRepo.findCommentByTicket(id);
+		}
 	
 	//DELETE
 		public void deleteComment(Long id) {

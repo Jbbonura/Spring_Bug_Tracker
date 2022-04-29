@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isErrorPage="true" %> 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -248,13 +249,13 @@
                     </tr>  
                 </thead>
                 <tbody>
-                <tr>
-                	<td>
-                		Test
-                	</td>
-                	
-                </tr>
-
+                	<c:forEach var="comment" items="${comments}">
+                		<tr>
+                			<td><c:out value="${comment.commentingUser.name}"/></td>
+                			<td><c:out value="${comment.commentText}"/></td>
+                			<td><fmt:formatDate type="date" value ="${comment.createdAt}"/></td>
+                		</tr>
+                	</c:forEach>
                 </tbody>
             </table>
             
@@ -287,25 +288,7 @@
 		                 </tr>  
               		</thead>
               		<tbody>
-                		<c:forEach var="comment" items="${comments}"> -->
-		                <tr>
-					        <td ><c:out value="${comment.name }"/> </td>
-					        <td >Demo Dev </td>
-					       	<td><c:out value="${comment.comment }" /></td>
-					        <td>Some comment goes here</td>
-					       	<td><c:out value="${comment.created_at }" /></td>
-					        <td>20210426</td>
-					        <td>
-					        <div class="edit-action"> <div class="edit-button"><a class="edit-action2" href="/expenses/edit/${expense.id }">Edit</a> </div></div>
-					        <form action="/expenses/delete/${expense.id}" method="post">
-					          <input type="hidden" name="_method" value="delete"> 
-					            <div class="button-small">
-					            	<input type="submit" value="Delete">
-					           	</div>
-					        </form>
-					        </td>
-		      			</tr>
-                		</c:forEach>
+                		
              		 </tbody>
           		</table>
         </div>
@@ -317,12 +300,13 @@
         <div class="table-header">
         	<div class="title">Add Comment</div>
       	</div>
-        <form:form action="/comment/new" method="post" modelAttribute="comment" >
-        <form:hidden path="commentingUser" value=""/>
+        <form:form action="/comment/new" method="post" modelAttribute="newComment" >
+        <form:hidden path="commentingUser" value="${user_id}"/>
+        <form:hidden path="commentedTicket" value="${ticket.id}"/>
         	<div class="input-box">
             	<p>
-                 <form:errors path="comment" />
-                 <form:textarea rows="5" cols="120" wrap="soft" path="comment" placeholder="add comment here.." style="max-width:100%;" />
+                 <form:errors path="commentText" />
+                 <form:textarea rows="5" cols="120" wrap="soft" path="commentText" placeholder="add comment here.." style="max-width:100%;" required="required"/>
             	 </p>
         	 </div>
         	<div class="button">

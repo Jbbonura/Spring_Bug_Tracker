@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.codingdojo.bugtracker.models.Ticket;
 import com.codingdojo.bugtracker.models.Ticket.TicketStatus;
+import com.codingdojo.bugtracker.models.Ticket.TicketType;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Long>{
@@ -25,5 +26,7 @@ public interface TicketRepository extends CrudRepository<Ticket, Long>{
 	@Query("SELECT t FROM Ticket t WHERE project_id IS ?1")
 	List<Ticket> findTicketByProject(Long id);
 	
+	@Query("SELECT t FROM Ticket t WHERE ticketType = ?1")
+	List<Ticket> findTicketByType(TicketType type);	
 }
 

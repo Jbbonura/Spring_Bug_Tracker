@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.codingdojo.bugtracker.models.Ticket;
 import com.codingdojo.bugtracker.models.Ticket.TicketStatus;
+import com.codingdojo.bugtracker.models.Ticket.TicketType;
 import com.codingdojo.bugtracker.repositories.TicketRepository;
 
 @Service
@@ -40,6 +41,11 @@ public class TicketService {
 		}
 		public List<Ticket> getTicketByStatus(TicketStatus status) {
 			return ticketRepo.findTicketByStatus(status);
+		}
+		
+		//read with specific type
+		public List<Ticket> getTicketByType(TicketType type){
+			return ticketRepo.findTicketByType(type);
 		}
 		
 		//read by project
@@ -87,6 +93,18 @@ public class TicketService {
 			}
 			return count;
 			
+		}
+		
+		public int ticketCount(TicketType type) {
+			//fetch all tickets with matching type
+			List<Ticket> tickets = getTicketByType(type);
+			
+			//count tickets
+			int count = 0;
+			for(Ticket ticket : tickets) {
+				count++;
+			}
+			return count;
 		}
 		
 }	

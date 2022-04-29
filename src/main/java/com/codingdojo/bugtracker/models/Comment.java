@@ -28,7 +28,7 @@ public class Comment {
 	//Member Variables
 	@NotNull(message="Comment is empty")
 	@Size(min = 1, max = 255, message="Comment has a 255 character max.")
-	private String comment;
+	private String commentText;
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -53,9 +53,9 @@ public class Comment {
 	}
 	//Full Constructor
 		public Comment(
-			@NotNull(message = "Comment is empty") @Size(min = 1, max = 255, message = "Comment has a 255 character max.") String comment) {
+			@NotNull(message = "Comment is empty") @Size(min = 1, max = 255, message = "Comment has a 255 character max.") String commentText) {
 		super();
-		this.comment = comment;
+		this.commentText = commentText;
 	}
 
 	//Getters and Setters
@@ -65,11 +65,11 @@ public class Comment {
 		public void setId(Long id) {
 			this.id = id;
 		}
-		public String getComment() {
-			return comment;
+		public String getCommentText() {
+			return commentText;
 		}
-		public void setComment(String comment) {
-			this.comment = comment;
+		public void setCommentText(String commentText) {
+			this.commentText = commentText;
 		}
 		public Date getCreatedAt() {
 			return createdAt;

@@ -21,6 +21,7 @@ import com.codingdojo.bugtracker.models.Ticket;
 import com.codingdojo.bugtracker.models.Ticket.TicketStatus;
 import com.codingdojo.bugtracker.models.Ticket.TicketType;
 import com.codingdojo.bugtracker.models.User;
+import com.codingdojo.bugtracker.services.CommentService;
 import com.codingdojo.bugtracker.services.ProjectService;
 import com.codingdojo.bugtracker.services.TicketService;
 import com.codingdojo.bugtracker.services.UserService;
@@ -33,6 +34,8 @@ public class ticketController {
 	public ProjectService projectServ;
 	@Autowired
 	public UserService userServ;
+	@Autowired
+	public CommentService commentServ;
 	
 	@RequestMapping("/ticket/new")
 	public String createTicketForm(
@@ -138,7 +141,11 @@ public class ticketController {
 			List<User> devs = userServ.getDevs();
 			model.addAttribute("devs", devs);
 			
-			model.addAttribute("comment", new Comment());
+			//send over all comments for that ticket
+			List<Comment> comments = commentServ.getCommentsByTicket(id);
+			model.addAttribute("comments", comments);
+			
+			model.addAttribute("newComment", new Comment());
 			return "ticket.jsp";
 	}
 	
@@ -156,6 +163,16 @@ public class ticketController {
 		
 		ticketServ.createTicket(filledTicket);
 		return "redirect:/tickets";
+	}
+	
+	@PostMapping("/comment/new")
+	public String addComment(
+			@Valid @ModelAttribute("comment") Comment filledComment,
+			BindingResult result) {
+		
+		//no validation needed
+		commentServ.createComment(filledComment);
+		return "redirect:/ticket/"+filledComment.getCommentedTicket().getId();
 	}
 	
 	
