@@ -43,25 +43,7 @@
                     </span>
                 </div>
  			</div>
- 				<div class="actions1">
-	            	<div class="button2">
-	                	<input type="submit" value="Demo Admin">
-	               </div>
-	               <div class="button2">
-	               		<input type="submit" value="Demo PM">
-	               </div>
-	               <div class="button2">
-	                    <input type="submit" value="Demo Dev">
-	               </div>
-                </div>
-                <div class="actions2">
-                    <div class="button2">
-                        <input type="submit" value="Demo New User">
-                    </div>
-                    <div class="button2">
-                        <input type="submit" value="Demo Submitter">
-                    </div>
-                </div>
+ 				
    		</div>
 	</div>
 </body>

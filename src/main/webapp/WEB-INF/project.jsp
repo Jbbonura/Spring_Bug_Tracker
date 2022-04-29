@@ -141,7 +141,7 @@
               </div>
             </div>
             <div style="overflow-x:auto;" class="ticket-comments">
-              <table style="width: 100%;" class="table-content"  id="history-table">
+              <table style="width: 100%;" class="table-content"  id="project-tickets">
                   <thead>
                       <tr class="table100-head">
                           <th style="width:15%;"class="column1">Title</th>
@@ -180,6 +180,55 @@
     sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
   }
 </script>
+
+
+ <script>
+              function searchTable() {
+                  var input, filter, found, table, tr, td, i, j;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("project-tickets");
+                  tr = table.getElementsByTagName("tr");
+                  for (i = 0; i < tr.length; i++) {
+                      td = tr[i].getElementsByTagName("td");
+                      for (j = 0; j < td.length; j++) {
+                          if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                              found = true;
+                          }
+                      }
+                      if (found) {
+                          tr[i].style.display = "";
+                          found = false;
+                      } else {
+                          tr[i].style.display = "none";
+                      }
+                  }
+              }
+              </script>
+              
+<script>
+              function searchTable() {
+                  var input, filter, found, table, tr, td, i, j;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("assigned");
+                  tr = table.getElementsByTagName("tr");
+                  for (i = 0; i < tr.length; i++) {
+                      td = tr[i].getElementsByTagName("td");
+                      for (j = 0; j < td.length; j++) {
+                          if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                              found = true;
+                          }
+                      }
+                      if (found) {
+                          tr[i].style.display = "";
+                          found = false;
+                      } else {
+                          tr[i].style.display = "none";
+                      }
+                  }
+              }
+              </script>
 
 </body>
 </html>
