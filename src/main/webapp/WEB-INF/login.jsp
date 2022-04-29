@@ -28,7 +28,7 @@
                         <div class="input-box">
                             <p class="details">
 	                            Password:
-	                            <form:input path="password" placeholder="Enter your password" />
+	                            <form:password path="password" placeholder="Enter your password" />
 								<form:errors path="password" />
                             </p>
                         </div>

@@ -17,11 +17,11 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-user' ></i>
-      <span class="logo_name">Welcome,</span>  <!--add session name-->
+      <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#" class="active">
+        <a href="/">
           <i class='bx bx-grid-alt' ></i>
           <span class="links_name">Dashboard Home</span>
         </a>
@@ -45,7 +45,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/tickets">
           <i class='bx bx-coin-stack' ></i>
           <span class="links_name">My Tickets</span>
         </a>
@@ -80,7 +80,18 @@
       </div>
       <div class="profile-details">
         <!--<img src="images/profile.jpg" alt="">-->
-        <span class="admin_name">Demo Admin</span>
+         <c:if test="${user_role == 3}">
+        	<span class="admin_name">Logged in as a Submitter</span>
+        </c:if>
+  		<c:if test="${user_role == 2}">
+        	<span class="admin_name">Logged in as a Developer</span>
+        </c:if>
+        <c:if test="${user_role == 1}">
+        	<span class="admin_name">Logged in as a Project Manager</span>
+        </c:if>
+        <c:if test="${user_role == 0}">
+        	<span class="admin_name">Logged in as an Admin</span>
+        </c:if>
         <!-- <i class='bx bx-chevron-down' ></i> -->
       </div>
     </nav>
@@ -91,31 +102,131 @@
         <div class="recent-sales box">
           <div class="title">Details for ticket <!--add session--></div> 
           <div class="sales-details">
-            <ul class="details">
-              <li class="topic">Ticket Title</li>
-              <li><a href="#">Great Work</a></li>
-              <li class="topic">Assigned Developer</li>
-              <li><a href="#">DemoD Dev</a></li>
-              <li class="topic">Project</li>
-              <li><a href="#">Demo Project 1</a></li>
-              <li class="topic">Ticket Status</li>
-              <li><a href="#">Open</a></li>
-              <li class="topic">Created</li>
-              <li><a href="#">createdat data from DB</a></li>
-            </ul>
-            
-            <ul class="details">
-              <li class="topic">Ticket Description</li>
-              <li><a href="#">You're getting there, keep pushing</a></li>
-              <li class="topic">Submitter</li>
-              <li><a href="#">DemoS Submit</a></li>
-              <li class="topic">Ticket Priority</li>
-              <li><a href="#">Medium</a></li>
-              <li class="topic">Ticket Type</li>
-              <li><a href="#">Bugs Errors</a></li>
-              <li class="topic">Upated</li>
-              <li><a href="#">*Date from DB*</a></li>
-          </ul>
+            <form:form action="/ticket/${ticket.id}" method="post" modelAttribute="ticket">
+            	<input type="hidden" name="_method" value="put">
+            	<div class="user-details">
+                    <div class="input-box">
+                      	<p>
+                      		Title: <c:out value = "${ticket.title}"/>
+                      		<form:hidden path="title" value="${ticket.title}"/>
+                  	  	</p>
+                  	</div>
+                    <div class="input-box">
+                        <p>
+                            Project: <c:out value = "${ticket.project.name}"/>
+                            <form:hidden path="project" value="${ticket.project.id}"/>
+                            <form:hidden path="submitter" value="${ticket.submitter.id}"/>
+                        </p>
+                    </div>
+                    		<div class="input-box">
+                        		<p>
+                           		
+                           		 <c:choose>
+                    				<c:when test="${user_role < 3}"> 
+                    					Ticket Priority:
+		                            	<form:errors path="priority" />
+		                            	<form:select path="priority">
+		                            		<form:option value="0">None</form:option>
+		                            		<form:option value="1">Low</form:option>
+		                            		<form:option value="2">Medium</form:option>
+		                            		<form:option value="3">High</form:option>
+		                           	 </form:select>
+		                           	 </c:when>
+		                    		<c:otherwise>
+		                    			 Ticket Priority:
+		                    			 <form:hidden path="priority" value="${ticket.priority}"/>
+		                    			 <c:choose>
+			          						<c:when test="${ticket.priority == 0}">
+			          							 None
+			          						</c:when>
+			          						<c:when test="${ticket.priority == 1}">
+			          							Low
+			          						</c:when>
+			          						<c:when test="${ticket.priority == 2}">
+			          							Medium
+			          						</c:when>
+			          						<c:when test="${ticket.priority == 3}">
+			          							High
+			          						</c:when>
+          								</c:choose>
+		                    		</c:otherwise>
+		                    	</c:choose>
+		                        </p>
+		                    </div>
+                    <div class="input-box">
+                        <p>
+                            Ticket Type: <c:out value="${ticket.ticketType}"/>
+                            <form:hidden path="ticketType" value="${ticket.ticketType}"/>
+                        </p>
+                    </div>
+                    <div class="input-box">
+                        <p>
+                            Description: <c:out value="${ticket.description}"/>
+                            <form:hidden path="description" value="${ticket.description}"/>
+                        </p>
+                    </div>
+                    <div class="input-box">
+                    	<p>
+                    		Ticket Status: 
+                    		<c:choose>
+	                    		<c:when test="${user_role < 3}">
+		                    		<form:errors path="ticketStatus" />
+		                            <form:select path="ticketStatus">
+		                            	<c:forEach var="status" items="${status}">
+		                            		<form:option value="${status}"><c:out value="${status}"></c:out></form:option>
+		                            	</c:forEach>
+		                            </form:select>
+	                            </c:when>
+	                            <c:otherwise>
+	                            	<c:out value="${ticket.ticketStatus}"/>
+	                            	<form:hidden path="ticketStatus" value="${ticket.ticketStatus}"/>
+	                            </c:otherwise>
+                            </c:choose>
+                    	</p>
+                    </div>
+                   
+		            <div class="input-box">
+		                <p>
+		                 	<c:choose> 
+		                   		<c:when test="${user_role < 2}">
+		                    		Assign Developer:
+		                            <form:select path="assignedDev" required="required">
+		                            	<form:option value="" disabled="">Please assign ticket to Dev</form:option>
+		                            	<c:forEach var="dev" items="${devs}">
+		                            		<c:choose>
+		                            			<c:when test="${dev.id == ticket.assignedDev.id}">
+		                            				<form:option value="${dev.id}" selected="true"><c:out value="${dev.name}"></c:out></form:option>
+		                            			</c:when>
+		                            			<c:otherwise>
+		                            				<form:option value="${dev.id}"><c:out value="${dev.name}"></c:out></form:option>
+		                            			</c:otherwise>
+		                            		</c:choose>
+		                            		
+		                            	</c:forEach>
+		                            </form:select>
+		                    	 </c:when>
+	                    		<c:otherwise>
+	                    			Assigned Developer: 
+	                    			<c:choose>
+	                    				<c:when test="${ticket.assignedDev == null}">
+	                    					UNASSIGNED
+	                    				</c:when>
+	                    				<c:otherwise>
+	                    					<c:out value="${ticket.assignedDev.name}"/>
+	                    					<form:hidden path="assignedDev" value="${ticket.assignedDev.id}"/>
+	                    				</c:otherwise>
+	                    			</c:choose>
+	                    	 	</c:otherwise> 
+	                    	 </c:choose>
+	                   	</p>
+		            </div> 
+                </div>
+                <c:if test="${user_role < 3}">
+	                <div class="button">
+	                   	<input type="submit" value="Edit">
+	                </div>
+                </c:if>
+            </form:form>
           </div>
         </div>
         <div class="top-sales box">
@@ -262,7 +373,7 @@
         	<div class="title">Add Comment</div>
       	</div>
         <form:form action="/comment/new" method="post" modelAttribute="comment">
-        <form:hidden path="manager" value=""/>
+        <form:hidden path="commentingUser" value=""/>
         	<div class="input-box">
             	<p>
                  Comment:

@@ -21,7 +21,7 @@
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#" class="active">
+        <a href="/">
           <i class='bx bx-grid-alt' ></i>
           <span class="links_name">Dashboard Home</span>
         </a>
@@ -45,7 +45,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/tickets">
           <i class='bx bx-coin-stack' ></i>
           <span class="links_name">My Tickets</span>
         </a>

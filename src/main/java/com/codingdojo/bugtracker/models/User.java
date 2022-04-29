@@ -73,12 +73,7 @@ public class User {
 	private List<Ticket> commentedTickets;
 	
 	//Many to Many with Tickets w/ no middle model
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(
-			name = "dev_assigned_to_ticket",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "ticket_id")
-			)
+	@OneToMany(mappedBy="assignedDev", fetch=FetchType.LAZY)
 	private List<Ticket> assignedTickets;
 	
 	//Many To Many with Project w/ middle model of tickets

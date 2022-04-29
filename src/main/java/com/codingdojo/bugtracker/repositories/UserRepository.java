@@ -17,5 +17,7 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Query("SELECT u FROM User u WHERE role < ?1")
 	List<User> getUserWhereIdLessThan(int role);
 
+	@Query("SELECT u FROM User u WHERE role = 1 OR role = 2")
+	List<User> getDevs();
 	
 }

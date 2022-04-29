@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- New line below to use the JSP Standard Tag Library -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isErrorPage="true" %> 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -14,11 +19,11 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-user' ></i>
-      <span class="logo_name">Welcome,</span>  <!--add session name-->
+      <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
     <ul class="nav-links">
       <li>
-        <a href="#" class="active">
+        <a href="/">
           <i class='bx bx-grid-alt' ></i>
           <span class="links_name">Dashboard Home</span>
         </a>
@@ -42,7 +47,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/tickets" class="active">
           <i class='bx bx-coin-stack' ></i>
           <span class="links_name">My Tickets</span>
         </a>
@@ -79,7 +84,7 @@
         </a>
       </li> -->
       <li class="log_out">
-        <a href="#">
+        <a href="/logout">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
@@ -97,7 +102,18 @@
       
       <div class="profile-details">
         <!--<img src="images/profile.jpg" alt="">-->
-        <span class="admin_name">Demo Dev</span>
+        <c:if test="${user_role == 3}">
+        	<span class="admin_name">Logged in as a Submitter</span>
+        </c:if>
+  		<c:if test="${user_role == 2}">
+        	<span class="admin_name">Logged in as a Developer</span>
+        </c:if>
+        <c:if test="${user_role == 1}">
+        	<span class="admin_name">Logged in as a Project Manager</span>
+        </c:if>
+        <c:if test="${user_role == 0}">
+        	<span class="admin_name">Logged in as an Admin</span>
+        </c:if>
       </div>
     </nav>
 
@@ -118,7 +134,7 @@
                     <tr class="table100-head">
                         <th style="width:15%;"class="column1">Title</th>
                         <th style="width:15%;" class="column2">Project Name</th>
-                        <th style="width:15%;" class="column3">Developer Assiged</th>
+                        <th style="width:15%;" class="column3">Assigned Developer</th>
                         <th style="width:10%;"class="column4">Ticket Priority</th>
                         <th style="width:10%;"class="column5">Ticket Status</th>
                         <th style="width:10%;"class="column6">Ticket Type</th>
@@ -127,14 +143,38 @@
                     </tr>  
                 </thead>
                 <tbody>
-                  <!-- <c:forEach var="comment" items="${comments}"> -->
-                  <tr>
-          <!-- <td ><c:out value="${comment.name }"/> </td> -->
-          <td >Demo Dev </td>
-          <!-- <td><c:out value="${comment.comment }" /></td> -->
-          <td>Some comment goes here</td>
-          <!-- <td><c:out value="${comment.created_at }" /></td> -->
-          <td>20210426</td>
+                 	<c:forEach var="ticket" items="${tickets}">
+                  		<tr>
+          					<td><c:out value="${ticket.title}"/></td>
+          					<td><c:out value="${ticket.project.name}"/></td>
+          					<c:choose>
+          						<c:when test="${ticket.assignedDev == null}">
+          							<td>UNASSIGNED</td>
+          						</c:when>
+          						<c:otherwise>
+          							<td><c:out value="${ticket.assignedDev.name}"/></td>
+          						</c:otherwise>
+          					</c:choose>
+          					<c:choose>
+          						<c:when test="${ticket.priority == 0}">
+          							<td>None</td>
+          						</c:when>
+          						<c:when test="${ticket.priority == 1}">
+          							<td>Low</td>
+          						</c:when>
+          						<c:when test="${ticket.priority == 2}">
+          							<td>Medium</td>
+          						</c:when>
+          						<c:when test="${ticket.priority == 3}">
+          							<td>High</td>
+          						</c:when>
+          					
+          					</c:choose>
+          							<td><c:out value="${ticket.ticketStatus}"/></td>
+          					<td><c:out value="${ticket.ticketType}"/></td>
+          					<td><fmt:formatDate type="date" value ="${ticket.createdAt}"/></td>
+          					<td><a href="/ticket/${ticket.id}">View</a></td>
+          				
           <!-- <td>
           <div class="edit-action"> <div class="edit-button"><a class="edit-action2" href="/expenses/edit/${expense.id }">Edit</a> </div></div>
           
@@ -144,8 +184,8 @@
                         <input type="submit" value="Delete">
                       </div>
           </form></td> -->
-        </tr>
-                  </c:forEach>
+        				</tr>
+                 	 </c:forEach>
                 </tbody>
             </table>
             <script>

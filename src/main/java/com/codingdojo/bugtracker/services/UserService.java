@@ -1,5 +1,6 @@
 package com.codingdojo.bugtracker.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,6 +111,10 @@ public class UserService {
 			User user = getOneUser(id);
 			return user.getManagedProjects();
 		}
+		//read all non admin and submitter users
+		public List<User> getDevs() {
+			return userRepo.getDevs();
+		}
 		
 	//DELETE
 		public void deleteUser(Long id) {
@@ -181,5 +186,27 @@ public class UserService {
 				count++;
 			}
 			return count;
+		}
+		
+		//concat assigned project's tickets
+		public List<Ticket> allAssignedProjectsTickets(Long id) {
+			User user = getOneUser(id);
+			List<Project> managedProjects = user.getManagedProjects();
+			List<Ticket> allTickets = new ArrayList<>(); 
+			
+			for(Project project : managedProjects) {
+				System.out.println(project.getId());
+				List<Ticket> projectTickets = project.getProjectsTickets();
+				for(Ticket ticket : projectTickets) {
+					System.out.println(ticket.getTitle());
+					System.out.println(ticket.getProject().getId());
+				}
+				allTickets.addAll(projectTickets);
+				
+			}
+			
+			
+			return allTickets;
+			
 		}
 }

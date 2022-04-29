@@ -23,7 +23,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -48,7 +47,7 @@ public class Ticket {
 	private int priority;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="ticketStatus", columnDefinition="default 'NEW'")
+	@Column(name="ticketStatus")
 	private TicketStatus ticketStatus = TicketStatus.NEW;
 	
 	public enum TicketStatus {
@@ -86,14 +85,10 @@ public class Ticket {
 			)
 	private List<User> commentingUsers;
 	
-	//Many to Many with Users w/ no middle model
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(
-			name = "dev_assigned_to_ticket",
-			joinColumns = @JoinColumn(name = "ticket_id"),
-			inverseJoinColumns = @JoinColumn(name = "user_id")
-			)
-	private List<User> assignedDev;
+	//Many to One with users
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "assignedDev_id")
+	private User assignedDev;
 	
 	//Joining many to many between users and projects
 	
@@ -197,11 +192,11 @@ public class Ticket {
 		this.commentingUsers = commentingUsers;
 	}
 
-	public List<User> getAssignedDev() {
+	public User getAssignedDev() {
 		return assignedDev;
 	}
 
-	public void setAssignedDev(List<User> assignedDev) {
+	public void setAssignedDev(User assignedDev) {
 		this.assignedDev = assignedDev;
 	}
 
@@ -224,6 +219,7 @@ public class Ticket {
 	@PrePersist
 	protected void onCreate(){
 		this.createdAt = new Date();
+		this.ticketStatus = TicketStatus.NEW;
 	}
 	@PreUpdate
 	protected void onUpdate(){
