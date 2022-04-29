@@ -22,43 +22,48 @@
       <ul class="nav-links">
         <li>
           <a href="/" class="active">
-            <i class='bx bx-grid-alt' ></i>
+            <i class='bx bx-home-alt bx-tada' ></i>
             <span class="links_name">Dashboard Home</span>
           </a>
         </li>
         <li>
+<<<<<<< Updated upstream
           <a href="/user/roles">
             <i class='bx bx-box' ></i>
+=======
+          <a href="#">
+            <i class='bx bxs-user-detail' ></i>
+>>>>>>> Stashed changes
             <span class="links_name">Manage Role Assignment</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class='bx bx-list-ul' ></i>
+            <i class='bx bxs-user-badge' ></i>
             <span class="links_name">Manage Project Users</span>
           </a>
         </li>
         <li>
           <a href="/projects">
-            <i class='bx bx-pie-chart-alt-2' ></i>
+            <i class='bx bx-list-ol' ></i>
             <span class="links_name">My Projects</span>
           </a>
         </li>
         <li>
           <a href="/tickets">
-            <i class='bx bx-coin-stack' ></i>
+            <i class='bx bx-book-alt' ></i>
             <span class="links_name">My Tickets</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class='bx bx-book-alt' ></i>
+            <i class='bx bx-user' ></i>
             <span class="links_name">User Profile</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class='bx bx-user' ></i>
+            <i class='bx bxl-microsoft-teams' ></i>
             <span class="links_name">Team</span>
           </a>
         </li>
@@ -95,9 +100,14 @@
         <span class="dashboard">Dashboard</span>
       </div>
       <c:if test = "${user_role == 0}">
+      <div class="new-ticket">
       	<a href="/project/new">New Project</a>
+      </div>
+      	
       </c:if>
-      <a href="/ticket/new">New Ticket</a>
+      <div class="new-ticket">
+      	<a href="/ticket/new">New Ticket</a>
+      </div>
       <div class="profile-details">
         <!--<img src="images/profile.jpg" alt="">-->
         <c:if test="${user_role == 3}">

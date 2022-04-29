@@ -317,12 +317,12 @@
         <div class="table-header">
         	<div class="title">Add Comment</div>
       	</div>
-        <form:form action="/comment/new" method="post" modelAttribute="comment">
+        <form:form action="/comment/new" method="post" modelAttribute="comment" >
         <form:hidden path="commentingUser" value=""/>
         	<div class="input-box">
             	<p>
                  <form:errors path="comment" />
-                 <form:textarea rows="5" cols="40" wrap="soft" path="comment" />
+                 <form:textarea rows="5" cols="120" wrap="soft" path="comment" placeholder="add comment here.." style="max-width:100%;" />
             	 </p>
         	 </div>
         	<div class="button">
