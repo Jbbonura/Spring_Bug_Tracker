@@ -363,9 +363,7 @@ nav .profile-details i{
     text-align: left;
 }
 
-.table-content th td{
-    
-}
+
 
 .table-header{
     display: flex;
@@ -377,6 +375,7 @@ nav .profile-details i{
 /* Bottom Tables */
 .bottomarea{
     display: flex;
+    width: 100%;
 }
 .bottombox1{
     width: 50%;
@@ -413,6 +412,12 @@ nav .profile-details i{
     /* margin-bottom: 10px; */
 }
 
+.bottombox2 .input-box{
+	margin-top: 20px;
+}
+
+.
+
 /* Ticket History */
 
 .title::after{
@@ -425,9 +430,7 @@ nav .profile-details i{
     background: linear-gradient(135deg, #070664, #d38209);
 }
 
-.upload-box{
-    margin-top: 30px;
-}
+
 
 /* Responsive Media Query */
 @media (max-width: 1240px) {
