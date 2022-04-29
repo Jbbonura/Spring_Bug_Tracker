@@ -356,6 +356,20 @@ nav .profile-details i{
   font-weight: 400;
   color: #333;
 }
+
+.new-ticket{
+	background: #fff;
+  padding: 15px 15px;
+  margin: 0 20px 0 0;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.new-ticket a{
+	text-decoration: none;
+	color: black;
+}
+
+
 /* Responsive Media Query */
 @media (max-width: 1240px) {
   .sidebar{
