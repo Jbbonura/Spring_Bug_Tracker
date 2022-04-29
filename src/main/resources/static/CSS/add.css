@@ -149,11 +149,11 @@ nav .search-box .bx-search{
 .home-section nav .profile-details{
   display: flex;
   align-items: center;
-  background: #F5F6FA;
-  border: 2px solid #EFEEF1;
+  
+  
   border-radius: 6px;
   height: 50px;
-  min-width: 190px;
+  
   padding: 0 15px 0 2px;
 }
 nav .profile-details img{
@@ -438,6 +438,14 @@ form .button a{
 }
 .button{
 	display: flex;
+}
+
+.profile-details{
+	background: #fff;
+  padding: 15px 15px;
+  margin: 0 20px 0 0;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 

@@ -62,24 +62,6 @@
             <span class="links_name">Team</span>
           </a>
         </li>
-        <!-- <li>
-          <a href="#">
-            <i class='bx bx-message' ></i>
-            <span class="links_name">Messages</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-heart' ></i>
-            <span class="links_name">Favrorites</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">Setting</span>
-          </a>
-        </li> -->
         <li class="log_out">
           <a href="/logout">
             <i class='bx bx-log-out'></i>
@@ -94,17 +76,16 @@
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
+      <div class="top-links">
       <c:if test = "${user_role == 0}">
       <div class="new-ticket">
       	<a href="/project/new">New Project</a>
       </div>
-      	
       </c:if>
       <div class="new-ticket">
       	<a href="/ticket/new">New Ticket</a>
       </div>
       <div class="profile-details">
-        <!--<img src="images/profile.jpg" alt="">-->
         <c:if test="${user_role == 3}">
         	<span class="admin_name">Logged in as a Submitter</span>
         </c:if>
@@ -117,6 +98,7 @@
         <c:if test="${user_role == 0}">
         	<span class="admin_name">Logged in as an Admin</span>
         </c:if>
+      </div>
       </div>
     </nav>
     
@@ -159,7 +141,7 @@
 	        </div>
 	        <div class="box">
 	          <div class="right-side">
-	            <div class="box-topic">Unresolved Tickets Submitted By You</div>
+	            <div class="box-topic">Your Unresolved Tickets</div>
 	            <div class="number"><c:out value="${submittedTicketCount}"/></div>
 	            <div class="indicator">
 	              <i class='bx bx-down-arrow-alt down'></i>

@@ -111,10 +111,10 @@
             <table style="width: 100%;" class="table-content"  id="projects-table">
                 <thead>
                     <tr class="table100-head">
-                        <th style="width:10%;"class="column1">Name</th>
-                        <th style="width:15%;" class="column2">Project Manager</th>
-                        <th style="width:10%;" class="column3">Unresolved Tickets</th>
-                        <th style="width:10%;"class="column4">Resolved Tickets</th>
+                        <th style="width:25%;"class="column1">Name</th>
+                        <th style="width:20%;" class="column2">Project Manager</th>
+                        <th style="width:20%;" class="column3">Unresolved Tickets</th>
+                        <th style="width:20%;"class="column4">Resolved Tickets</th>
                         <th style="width:15%;"class="column7">Actions</th>
                     </tr>  
                 </thead>

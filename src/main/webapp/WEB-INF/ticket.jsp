@@ -23,43 +23,43 @@
     <ul class="nav-links">
       <li>
         <a href="/">
-          <i class='bx bx-grid-alt' ></i>
+          <i class='bx bx-home-alt' ></i>
           <span class="links_name">Dashboard Home</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <i class='bx bx-box' ></i>
+          <i class='bx bx-user-plus' ></i>
           <span class="links_name">Manage Role Assignment</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <i class='bx bx-list-ul' ></i>
+          <i class='bx bxs-user-detail' ></i>
           <span class="links_name">Manage Project Users</span>
         </a>
       </li>
       <li>
         <a href="/projects">
-          <i class='bx bx-pie-chart-alt-2' ></i>
+          <i class='bx bx-list-ol' ></i>
           <span class="links_name">My Projects</span>
         </a>
       </li>
       <li>
         <a href="/tickets">
-          <i class='bx bx-coin-stack' ></i>
+          <i class='bx bx-book-add bx-tada' ></i>
           <span class="links_name">My Tickets</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <i class='bx bx-book-alt' ></i>
+          <i class='bx bx-user' ></i>
           <span class="links_name">User Profile</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <i class='bx bx-user' ></i>
+          <i class='bx bxl-microsoft-teams' ></i>
           <span class="links_name">Team</span>
         </a>
       </li>
@@ -80,7 +80,6 @@
         <span class="dashboard">Ticket Details</span>
       </div>
       <div class="profile-details">
-        <!--<img src="images/profile.jpg" alt="">-->
          <c:if test="${user_role == 3}">
         	<span class="admin_name">Logged in as a Submitter</span>
         </c:if>
@@ -93,7 +92,6 @@
         <c:if test="${user_role == 0}">
         	<span class="admin_name">Logged in as an Admin</span>
         </c:if>
-        <!-- <i class='bx bx-chevron-down' ></i> -->
       </div>
     </nav>
   <!--********************END TOP NAV BAR*****************************-->

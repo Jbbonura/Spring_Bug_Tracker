@@ -76,7 +76,7 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">New Ticket</span>
+        <span class="dashboard">New Project</span>
       </div>
       
       <div class="profile-details">
@@ -132,10 +132,11 @@
                 </div>
                     <div class="button">
                     <input type="submit" value="Submit">
+                    <a href="/">Cancel</a>   
                 </div>
             </form:form>  
             
-            <a href="/">Cancel</a>   
+            
             
         </div>
     </div>
