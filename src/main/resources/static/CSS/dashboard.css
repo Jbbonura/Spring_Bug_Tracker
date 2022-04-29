@@ -149,7 +149,6 @@ nav .search-box .bx-search{
 .home-section nav .profile-details{
   display: flex;
   align-items: center;
-  background: #F5F6FA;
   border: 2px solid #EFEEF1;
   border-radius: 6px;
   height: 50px;
@@ -359,14 +358,33 @@ nav .profile-details i{
 
 .new-ticket{
 	background: #fff;
+  padding: 0 15px 0 2px;
+  margin: 0 20px 0 0;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #EFEEF1;
+  height: 50px;
+  align-items: center;
+  display: flex;
+  
+}
+.new-ticket a{
+	text-decoration: none;
+	color: black;
+	padding-left: 10px;
+}
+
+.profile-details{
+	background: #fff;
   padding: 15px 15px;
   margin: 0 20px 0 0;
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-.new-ticket a{
-	text-decoration: none;
-	color: black;
+
+.top-links{
+	display: flex;
+	
 }
 
 
