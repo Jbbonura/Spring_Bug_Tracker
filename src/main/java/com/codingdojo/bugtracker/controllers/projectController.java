@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingdojo.bugtracker.models.Project;
+import com.codingdojo.bugtracker.models.Ticket;
 import com.codingdojo.bugtracker.models.User;
 import com.codingdojo.bugtracker.services.ProjectService;
+import com.codingdojo.bugtracker.services.TicketService;
 import com.codingdojo.bugtracker.services.UserService;
 
 @Controller
@@ -25,6 +27,8 @@ public class projectController {
 	public ProjectService projectServ;
 	@Autowired
 	public UserService userServ;
+	@Autowired
+	public TicketService ticketServ;
 	
 	@RequestMapping("/project/new")
 	public String createProjectForm(
@@ -101,13 +105,17 @@ public class projectController {
 		Project project = projectServ.getOneProject(id);
 		model.addAttribute("project", project);
 		
-		//get project unresolved ticket count
-		int unresolvedTicketCount = projectServ.unresolvedProjectTicketCount(id);
-		model.addAttribute("unresolvedTicketCount", unresolvedTicketCount);
+		//get ticket by project
+		List<Ticket> tickets = ticketServ.getTicketByProject(id);
+		model.addAttribute("tickets", tickets);
 		
-		//get project resolved ticket count
-		int resolvedTicketCount = projectServ.resolvedProjectTicketCount(id);
-		model.addAttribute("resolvedTicketCount", resolvedTicketCount);
+//		//get project unresolved ticket count
+//		int unresolvedTicketCount = projectServ.unresolvedProjectTicketCount(id);
+//		model.addAttribute("unresolvedTicketCount", unresolvedTicketCount);
+//		
+//		//get project resolved ticket count
+//		int resolvedTicketCount = projectServ.resolvedProjectTicketCount(id);
+//		model.addAttribute("resolvedTicketCount", resolvedTicketCount);
 		
 		return "project.jsp";
 	}

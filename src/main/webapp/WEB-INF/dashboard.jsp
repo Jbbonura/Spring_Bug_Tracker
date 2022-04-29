@@ -27,7 +27,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/user/roles">
             <i class='bx bx-box' ></i>
             <span class="links_name">Manage Role Assignment</span>
           </a>

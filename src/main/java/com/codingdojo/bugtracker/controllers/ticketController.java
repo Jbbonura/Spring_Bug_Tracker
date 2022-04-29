@@ -110,10 +110,10 @@ public class ticketController {
 			List<Ticket> tickets = user.getAssignedTickets();
 					model.addAttribute("tickets", tickets);
 		}
-		else {
-			List<Ticket> tickets = user.getSubmittedTickets();
-			model.addAttribute("tickets", tickets);
-		}
+//		else {
+//			List<Ticket> tickets = user.getSubmittingUsers();
+//			model.addAttribute("tickets", tickets);
+//		}
 		
 		return "tickets.jsp"; 
 	}

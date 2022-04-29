@@ -20,6 +20,8 @@ import com.codingdojo.bugtracker.repositories.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	public TicketService ticketServ;
 	
 	//LOGIN AND REGISTRATION LOGIC
 	
@@ -196,7 +198,7 @@ public class UserService {
 			
 			for(Project project : managedProjects) {
 				System.out.println(project.getId());
-				List<Ticket> projectTickets = project.getProjectsTickets();
+				List<Ticket> projectTickets = ticketServ.getTicketByProject(project.getId());
 				for(Ticket ticket : projectTickets) {
 					System.out.println(ticket.getTitle());
 					System.out.println(ticket.getProject().getId());

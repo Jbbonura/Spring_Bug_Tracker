@@ -22,5 +22,8 @@ public interface TicketRepository extends CrudRepository<Ticket, Long>{
 	@Query("SELECT t FROM Ticket t WHERE ticketStatus IS NOT ?1 AND submitter_id = ?2")
 	List<Ticket> findTicketByStatusAndId(TicketStatus status, Long id);
 	
+	@Query("SELECT t FROM Ticket t WHERE project_id IS ?1")
+	List<Ticket> findTicketByProject(Long id);
+	
 }
 

@@ -41,6 +41,11 @@ public class TicketService {
 		public List<Ticket> getTicketByStatus(TicketStatus status) {
 			return ticketRepo.findTicketByStatus(status);
 		}
+		
+		//read by project
+		public List<Ticket> getTicketByProject(Long id) {
+			return ticketRepo.findTicketByProject(id);
+		}
 	//DELETE
 		public void deleteTicket(Long id) {
 			ticketRepo.deleteById(id);
@@ -83,4 +88,5 @@ public class TicketService {
 			return count;
 			
 		}
+		
 }	

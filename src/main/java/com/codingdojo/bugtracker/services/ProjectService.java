@@ -14,6 +14,8 @@ import com.codingdojo.bugtracker.repositories.ProjectRepository;
 public class ProjectService {
 	@Autowired
 	private ProjectRepository projectRepo;
+	@Autowired
+	public TicketService ticketServ;
 	
 	//CREATE
 		public Project createProject(Project newProject) {
@@ -24,7 +26,8 @@ public class ProjectService {
 		
 		//read one
 		public Project getOneProject(Long id) {
-			return projectRepo.findById(id).orElse(null);
+			Project project = projectRepo.findById(id).orElse(null);
+			return project;
 		}
 	
 		//read all
@@ -52,7 +55,7 @@ public class ProjectService {
 		//Get unresolved projectTicketCount
 		public int unresolvedProjectTicketCount(Long id) {
 			Project project = getOneProject(id);
-			List<Ticket> tickets = project.getProjectsTickets();
+			List<Ticket> tickets = ticketServ.getTicketByProject(id);
 			int count = 0;
 			int index = 0;
 			
@@ -70,7 +73,7 @@ public class ProjectService {
 		
 		public int resolvedProjectTicketCount(Long id) {
 			Project project = getOneProject(id);
-			List<Ticket> tickets = project.getProjectsTickets();
+			List<Ticket> tickets = ticketServ.getTicketByProject(id);
 			int count= 0;
 			int index= 0;
 			

@@ -67,7 +67,7 @@ public class Project {
 			joinColumns = @JoinColumn(name = "project_id"),
 			inverseJoinColumns = @JoinColumn(name = "submitter_id")
 			)
-	private List<Ticket> projectsTickets;
+	private List<User> projectsUsers;
 	
 	//Empty Constructor
 	public Project() {
@@ -125,11 +125,11 @@ public class Project {
 	public void setManager(User manager) {
 		this.manager = manager;
 	}
-	public List<Ticket> getProjectsTickets() {
-		return projectsTickets;
+	public List<User> getProjectsUsers() {
+		return projectsUsers;
 	}
-	public void setProjectsTickets(List<Ticket> projectsTickets) {
-		this.projectsTickets = projectsTickets;
+	public void setProjectsUsers(List<User> projectsUsers) {
+		this.projectsUsers = projectsUsers;
 	}
 	
 	//ADDITIONAL GETTERS AND SETTERS

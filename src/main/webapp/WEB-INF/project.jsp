@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isErrorPage="true" %> 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -74,7 +75,7 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Details for project ${project.id} </span>
+        <span class="dashboard">Details for ${project.name} </span>
       </div>
       <div class="profile-details">
       	<c:if test="${user_role == 3}">
@@ -122,7 +123,7 @@
                     <tr class="table100-head">
                         <th class="column1">Title</th>
                         <th  class="column2">Project Name</th>
-                        <th  class="column3">Developer Assiged</th>
+                        <th  class="column3">Developer Assigned</th>
                     </tr>  
                 </thead>
                 <tbody>
@@ -151,8 +152,14 @@
                       </tr>  
                   </thead>
                   <tbody>
-                    	<c:forEach var="ticket" items="${project.projectsTickets}">
-                    		<td><c:out value="${ticket.title}"/></td>
+                    	<c:forEach var="ticket" items="${tickets}">
+                    		<tr>
+                    			<td><c:out value="${ticket.title}"/></td>
+                    			<td><c:out value="${ticket.submitter.name}"/></td>
+                    			<td><c:out value="${ticket.assignedDev.name}"/></td>
+                    			<td><c:out value="${ticket.ticketStatus}"/></td>
+                    			<td><fmt:formatDate type="date" value="${ticket.createdAt}"/></td>
+                    		</tr>
                     	</c:forEach>
                   </tbody>
               </table>  

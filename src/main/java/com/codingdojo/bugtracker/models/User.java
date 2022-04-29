@@ -83,7 +83,7 @@ public class User {
 			joinColumns = @JoinColumn(name = "submitter_id"),
 			inverseJoinColumns = @JoinColumn(name = "project_id")
 			)
-	private List<Ticket> submittedTickets;
+	private List<Project> submittingUsers;
 	
 	//Many to Many with Projects w/ no middle model
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -197,12 +197,12 @@ public class User {
 		this.assignedTickets = assignedTickets;
 	}
 
-	public List<Ticket> getSubmittedTickets() {
-		return submittedTickets;
+	public List<Project> getSubmittingUsers() {
+		return submittingUsers;
 	}
 
-	public void setSubmittedTickets(List<Ticket> submittedTickets) {
-		this.submittedTickets = submittedTickets;
+	public void setSubmittedTickets(List<Project> submittingUsers) {
+		this.submittingUsers = submittingUsers;
 	}
 
 	public List<Project> getAssignedProjects() {
