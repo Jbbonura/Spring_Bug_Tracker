@@ -26,14 +26,9 @@
             <span class="links_name">Dashboard Home</span>
           </a>
         </li>
-        <li>
-<<<<<<< Updated upstream
+        <li> 
           <a href="/user/roles">
-            <i class='bx bx-box' ></i>
-=======
-          <a href="#">
             <i class='bx bxs-user-detail' ></i>
->>>>>>> Stashed changes
             <span class="links_name">Manage Role Assignment</span>
           </a>
         </li>
