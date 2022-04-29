@@ -165,7 +165,7 @@
                     <div class="button">
                     <input type="submit" value="Submit">
                     <a href="/">Cancel</a> 
-                </div>
+                	</div>
             </form:form>  
             
               

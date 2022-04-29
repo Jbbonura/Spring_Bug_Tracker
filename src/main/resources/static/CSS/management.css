@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -6,13 +7,6 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
-
-.container{
-    display: flex;
-    width: 100%;
-}
-
 .sidebar{
   position: fixed;
   height: 100%;
@@ -195,7 +189,7 @@ nav .profile-details i{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(100% / 4 - 15px);
+  width: calc(100% / 2 - 15px);
   background: #fff;
   padding: 15px 14px;
   border-radius: 12px;
@@ -205,57 +199,45 @@ nav .profile-details i{
   font-size: 20px;
   font-weight: 500;
 }
-.home-content .box .number{
-  display: inline-block;
-  font-size: 35px;
-  margin-top: -6px;
-  font-weight: 500;
-}
-.home-content .box .indicator{
-  display: flex;
-  align-items: center;
-}
 
 
 /* left box */
-.home-content .sales-boxes .recent-sales{
-  width: 50%;
+.bottom-boxes{
+  display: flex;
+  justify-content: center;
+}
+.home-content .bottom-boxes {
+  width: 97%;
   background: #fff;
   padding: 20px 30px;
   margin: 0 20px;
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-.home-content .sales-boxes .sales-details{
+.home-content  .sales-details{
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
-.sales-boxes .box .title{
+.box .title{
   font-size: 24px;
   font-weight: 500;
   /* margin-bottom: 10px; */
 }
-.sales-boxes .sales-details li.topic{
-  font-size: 20px;
-  font-weight: 500;
-}
-.sales-boxes .sales-details li{
-  list-style: none;
-  margin: 8px 0;
-}
-.sales-boxes .sales-details li a{
+
+
+.bottom-boxes .sales-details li a{
   font-size: 18px;
   color: #333;
   font-size: 400;
   text-decoration: none;
 }
-.sales-boxes .box .button{
+.bottom-boxes .box .right-side .button{
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
-.sales-boxes .box .button a{
+.bottom-boxes .box .button a{
   color: #fff;
   background: #0A2558;
   padding: 4px 12px;
@@ -265,107 +247,46 @@ nav .profile-details i{
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.sales-boxes .box .button a:hover{
+.bottom-boxes .box .button a:hover{
   background:  #0d3073;
 }
 
+/*align box with Active projects*/
+.recent-sales{
+    width: 30%;
+    background: #fff;
+    padding: 20px 30px;
+    margin: 0 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Right box */
-.home-content .sales-boxes .top-sales{
-  width: 50%;
+.home-content .bottom-boxes .top-sales{
+  width: 45%;
   background: #fff;
   padding: 20px 30px;
   margin: 0 20px 0 0;
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  align-items: center;
-  justify-content: space-around;
-}
-.sales-boxes .top-sales li{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-.sales-boxes .top-sales li a img{
-  height: 40px;
-  width: 40px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-right: 10px;
-  background: #333;
-}
-.sales-boxes .top-sales li a{
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-.sales-boxes .top-sales li .product,
-.price{
-  font-size: 17px;
-  font-weight: 400;
-  color: #333;
 }
 
-/* Ticket Comments */
-.ticket-comments{
-    align-items: center;
-    justify-content: space-around;
-}
 
-.table-content{
-    padding: 5px;
-    text-align: left;
+.top-sales {
+  width: 50%;
 }
-
 
 .table-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  gap: 4rem;
+  justify-content: space-between;
+  margin: 15px 0 25px 0 ;
 }
 
-
-/* Ticket Table */
-
-.ticket-display{
-    width: 95%;
-    background: #fff;
-    padding: 20px 30px;
-    margin: 15px;
-    border-radius: 12px;
-    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
-    align-items: center;
-    justify-content: space-around;
-    
+th{
+  text-align: left;
+  width: 30%;
 }
-
-.ticket-display .title{
-    font-size: 24px;
-    font-weight: 500;
-    /* margin-bottom: 10px; */
-}
-.bottombox2 .title{
-    font-size: 24px;
-    font-weight: 500;
-    /* margin-bottom: 10px; */
-}
-
-/* Ticket History */
-
-.title::after{
-    bottom: -1px;
-    content: "";
-    display: block;
-    height: 2px;
-    position: relative;
-    width: 120px;
-    background: linear-gradient(135deg, #070664, #d38209);
-}
-
-.upload-box{
-    margin-top: 30px;
-}
-
 /* Responsive Media Query */
 @media (max-width: 1240px) {
   .sidebar{
@@ -393,15 +314,15 @@ nav .profile-details i{
   }
 }
 @media (max-width: 1150px) {
-  .home-content .sales-boxes{
+  .home-content .bottom-boxes{
     flex-direction: column;
   }
-  .home-content .sales-boxes .box{
+  .home-content .bottom-boxes .box{
     width: 100%;
     overflow-x: scroll;
     margin-bottom: 30px;
   }
-  .home-content .sales-boxes .top-sales{
+  .home-content .bottom-boxes .top-sales{
     margin: 0;
   }
 }
@@ -421,7 +342,7 @@ nav .profile-details i{
     height: 50px;
     min-width: 40px;
   }
-  .home-content .sales-boxes .sales-details{
+  .home-content .bottom-boxes .sales-details{
     width: 560px;
   }
 }
