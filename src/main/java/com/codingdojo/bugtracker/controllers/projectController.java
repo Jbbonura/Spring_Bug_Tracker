@@ -1,5 +1,6 @@
 package com.codingdojo.bugtracker.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -87,6 +88,35 @@ public class projectController {
 			List<Project> projects = projectServ.getAllProjects();
 			model.addAttribute("projects", projects);
 		}
+		else if(session.getAttribute("user_role").equals(1)) {
+			List<Project> projects = projectServ.getAllByManager((Long) session.getAttribute("user_id"));
+			model.addAttribute("projects", projects);
+		}
+		else if(session.getAttribute("user_role").equals(2)) {
+			List<Project> projectsBulk = projectServ.getAllProjects();
+			List<Project> projects = new ArrayList<>();
+			for(Project project : projectsBulk) {
+				System.out.println(project);
+				Long id = project.getId();
+				List<Ticket> tickets = ticketServ.getTicketByProject(id);
+				for(Ticket ticket : tickets) {
+					User userAssigned = ticket.getAssignedDev();
+					User userSubmitted = ticket.getSubmitter();
+					
+					if(session.getAttribute("user_id") == userAssigned.getId() || session.getAttribute("user_id") == userSubmitted.getId()) {
+						projects.add(project);
+						//System.out.println(project);
+						break;
+					}
+					
+				}
+				
+			}
+			model.addAttribute("projects", projects);
+			
+		}
+		
+		
 		return "projects.jsp";
 	}
 	
@@ -104,6 +134,10 @@ public class projectController {
 		//get project 
 		Project project = projectServ.getOneProject(id);
 		model.addAttribute("project", project);
+		
+		//get project manager info
+		User manager = project.getManager();
+		model.addAttribute("manager", manager);
 		
 		//get ticket by project
 		List<Ticket> tickets = ticketServ.getTicketByProject(id);

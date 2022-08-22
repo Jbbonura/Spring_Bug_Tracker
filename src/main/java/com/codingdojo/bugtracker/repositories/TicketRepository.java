@@ -28,5 +28,26 @@ public interface TicketRepository extends CrudRepository<Ticket, Long>{
 	
 	@Query("SELECT t FROM Ticket t WHERE ticketType = ?1")
 	List<Ticket> findTicketByType(TicketType type);	
+	
+	@Query("SELECT t from Ticket t WHERE submitter_id = ?1")
+	List<Ticket> findTicketsBySubmitter(Long id);
+	
+	@Query("SELECT count(*) from Ticket WHERE ticketStatus = ?1")
+	int findAdminTicketCount(TicketStatus status);
+	
+	@Query("SELECT count(*) from Ticket WHERE ticketStatus = ?1 AND assigned_dev_id = ?2")
+	int findDevTicketCount(TicketStatus status, Long id);
+	
+	@Query("SELECT count(*) from Ticket WHERE priority = ?1")
+	int findAdminTicketPriorityCount(int priority);
+	
+	@Query("SELECT count(*) from Ticket WHERE priority = ?1 AND assigned_dev_id = ?2")
+	int findDevTicketPriorityCount(int priority, Long id);
+	
+	@Query("SELECT count(*) from Ticket where ticketType = ?1")
+	int findAdminTicketTypeCount(TicketType type);
+	
+	@Query("SELECT count(*) from Ticket WHERE ticketType = ?1 AND assigned_dev_id = ?2")
+	int findDevTicketTypeCount(TicketType type, Long id);
 }
 

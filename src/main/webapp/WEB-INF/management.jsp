@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isErrorPage="true" %> 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <title> Dashboard </title>
-<link rel="stylesheet" href="project.css">
+<link rel="stylesheet" href="/CSS/project.css">
+<link rel="stylesheet" href="/CSS/management.css">
 <!-- Boxicons CDN Link -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +28,7 @@
             <span class="links_name">Dashboard Home</span>
         </a>
         </li>
-        <li>
+        <!-- <li>
         <a href="#">
             <i class='bx bx-box' ></i>
             <span class="links_name">Manage Role Assignment</span>
@@ -34,7 +39,7 @@
             <i class='bx bx-list-ul' ></i>
             <span class="links_name">Manage Project Users</span>
         </a>
-        </li>
+        </li> -->
         <li>
         <a href="/projects">
             <i class='bx bx-pie-chart-alt-2' ></i>
@@ -47,7 +52,7 @@
             <span class="links_name">My Tickets</span>
         </a>
         </li>
-        <li>
+        <!-- <li>
         <a href="#">
             <i class='bx bx-book-alt' ></i>
             <span class="links_name">User Profile</span>
@@ -59,7 +64,7 @@
             <span class="links_name">Team</span>
         </a>
         </li>
-        <li class="log_out">
+ -->        <li class="log_out">
         <a href="/logout">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
@@ -91,11 +96,15 @@
         </nav>
         <div class="home-content">
             <div class="overview-boxes">
+            <form:form action="#" method="post" modelAttribute="users">
                 <div class="box">
                     <div class="right-side">
-                    <form:form action="/permissions" method="post" modelAttribute="permissions">
-            	    <form:hidden path="submitter" value="${user_id}"/>
                     <div class="box-topic">Select User</div>
+                    	<form:select path="id" required="required">
+                    	<c:forEach var="user" items="${users}">
+                    		<form:option value="${user.id}"><c:out value="{user.name}"></c:out></form:option> 
+                    	</c:forEach>
+                    	</form:select>
                     <div class="input-box">
                         <p>
                             <form:errors path="ticketType" />
@@ -126,9 +135,10 @@
                         <div class="button">
                             <input type="submit" value="Submit">
                             </div>
-                        </form:form> 
+                         
                     </div>
-                    
+                    </div>
+                </form:form>
                 </div>
                 
             </div>

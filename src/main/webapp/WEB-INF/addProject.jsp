@@ -20,24 +20,24 @@
       <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
     <ul class="nav-links">
-      <li>
+       <li>
         <a href="/">
           <i class='bx bx-grid-alt' ></i>
           <span class="links_name">Dashboard Home</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="#">
           <i class='bx bx-box' ></i>
           <span class="links_name">Manage Role Assignment</span>
         </a>
-      </li>
+      </li> 
       <li>
         <a href="#">
           <i class='bx bx-list-ul' ></i>
           <span class="links_name">Manage Project Users</span>
         </a>
-      </li>
+      </li> -->
       <li>
         <a href="/projects">
           <i class='bx bx-pie-chart-alt-2' ></i>
@@ -50,7 +50,7 @@
           <span class="links_name">My Tickets</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="#">
           <i class='bx bx-book-alt' ></i>
           <span class="links_name">User Profile</span>
@@ -61,7 +61,7 @@
           <i class='bx bx-user' ></i>
           <span class="links_name">Team</span>
         </a>
-      </li>
+      </li> -->
       <li class="log_out">
         <a href="/logout">
           <i class='bx bx-log-out'></i>

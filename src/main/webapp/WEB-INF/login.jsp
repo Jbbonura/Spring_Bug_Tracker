@@ -37,6 +37,9 @@
                         <input type="submit" value="Login">
                     </div>
                 </form:form>
+                <div class="button">
+                	<a href="/login/demo/admin">Demo Admin Login</a>
+                </div>
                 <div class="login-signup">
                     <span class="text">No Account?
                         <a href="/register" class="text signup-link">Register now</a>

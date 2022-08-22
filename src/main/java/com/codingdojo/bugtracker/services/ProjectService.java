@@ -34,6 +34,11 @@ public class ProjectService {
 		public List<Project> getAllProjects() {
 			return projectRepo.findAll();
 		}
+		
+		//read all by manager
+		public List<Project> getAllByManager(Long id) {
+			return projectRepo.findProjectsByManager(id);
+		}
 	
 	//DELETE
 		public void deleteProject(Long id) {
@@ -88,5 +93,6 @@ public class ProjectService {
 			}
 			return count;
 		}
+		
 		
 }

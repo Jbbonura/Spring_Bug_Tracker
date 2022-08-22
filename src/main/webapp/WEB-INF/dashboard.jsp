@@ -3,11 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isErrorPage="true" %> 
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
+    
     <title> Dashboard </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" ></script>
     <link rel="stylesheet" href="/CSS/dashboard.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -20,13 +24,13 @@
       <span class="logo_name">Welcome, <c:out value="${user_name}"/></span>  <!--add session name-->
     </div>
       <ul class="nav-links">
-        <li>
+       <li>
           <a href="/" class="active">
             <i class='bx bx-home-alt bx-tada' ></i>
             <span class="links_name">Dashboard Home</span>
           </a>
         </li>
-        <li> 
+        <!-- <li> 
           <a href="/user/roles">
             <i class='bx bxs-user-detail' ></i>
             <span class="links_name">Manage Role Assignment</span>
@@ -37,7 +41,7 @@
             <i class='bx bxs-user-badge' ></i>
             <span class="links_name">Manage Project Users</span>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="/projects">
             <i class='bx bx-list-ol' ></i>
@@ -50,7 +54,7 @@
             <span class="links_name">My Tickets</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="#">
             <i class='bx bx-user' ></i>
             <span class="links_name">User Profile</span>
@@ -61,7 +65,7 @@
             <i class='bx bxl-microsoft-teams' ></i>
             <span class="links_name">Team</span>
           </a>
-        </li>
+        </li> -->
         <li class="log_out">
           <a href="/logout">
             <i class='bx bx-log-out'></i>
@@ -152,17 +156,6 @@
 	        </div>
 	      </c:when>
 	      <c:otherwise>
-	      		<div class="box">
-	          <div class="right-side">
-	            <div class="box-topic">My Projects</div>
-	            <div class="number"><c:out value="${projectCount}"/></div> <!--NEED TO ADD COUNTER, ADD NEW ICON-->
-	            <div class="indicator">
-	              <i class='bx bx-up-arrow-alt'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
-	          </div>
-	          <!-- <i class='bx bx-cart-alt cart'></i> -->
-	        </div>
 	        <div class="box">
 	          <div class="right-side">
 	            <div class="box-topic">My Unresolved Tickets</div>
@@ -201,178 +194,54 @@
        
         
       </div>
-		
+	<!-- CHARTS -->
       <div class="sales-boxes">
         <div class="top-sales box">
-            <div class="title">Whatever we call this</div>
-            <ul class="top-sales-details">
-              <li>
-              <a href="#">
-                <!--<img src="images/sunglasses.jpg" alt="">-->
-                <span class="product">New Users</span>
-              </a>
-              <span class="price">0</span>
-            </li>
-            <li>
-              <a href="#">
-                 <!--<img src="images/jeans.jpg" alt="">-->
-                <span class="product">Total Users </span>
-              </a>
-              <span class="price">1</span>
-            </li>
-            <li>
-              <a href="#">
-               <!-- <img src="images/nike.jpg" alt="">-->
-                <span class="product">Tickets in Development</span>
-              </a>
-              <span class="price">2</span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/scarves.jpg" alt="">-->
-                <span class="product">Total Developers</span>
-              </a>
-              <span class="price">0</span>
-            </li>
-            
-            </ul>
-          </div>
-        <!--<div class="recent-sales box">
-          <div class="title"></div>
-          <div class="sales-details">
-            <ul class="details">
-              <li class="topic">Date</li>
-              <li><a href="#">New Users</a></li>
-              <li><a href="#">Total Users</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-            </ul>
-           
-          </div>
-          <div class="button">
-            <a href="#">See All</a>
-          </div>
-        </div>-->
+        	<div class="title">Tickets By Status</div>
+        		<canvas id="statusChart" width="600" height="400"></canvas>
+          	</div>
+       
         <div class="top-sales box">
-          <div class="title">Company Data</div>
-          <ul class="top-sales-details">
-            <li>
-            <a href="#">
-              <!--<img src="images/sunglasses.jpg" alt="">-->
-              <span class="product">Members</span>
-            </a>
-            <span class="price">1</span>
-          </li>
-          <li>
-            <a href="#">
-               <!--<img src="images/jeans.jpg" alt="">-->
-              <span class="product">Projects </span>
-            </a>
-            <span class="price">2</span>
-          </li>
-          <li>
-            <a href="#">
-             <!-- <img src="images/nike.jpg" alt="">-->
-              <span class="product">Tickets</span>
-            </a>
-            <span class="price">8</span>
-          </li>
-          <li>
-            <a href="#">
-              <!--<img src="images/scarves.jpg" alt="">-->
-              <span class="product">Notifications</span>
-            </a>
-            <span class="price">56</span>
-          </li>
-         
-          </ul>
+          <div class="title">Tickets By Priority</div>
+          		<canvas id="priorityChart" width="600" height="400"></canvas>
         </div>
         <div class="top-sales box">
-            <div class="title">Priority Projects</div>
-            <ul class="top-sales-details">
-              <li>
-              <a href="#">
-                <!--<img src="images/sunglasses.jpg" alt="">-->
-                <span class="product">Some data chart here</span>
-              </a>
-              <span class="price"></span>
-            </li>
-            <li>
-              <a href="#">
-                 <!--<img src="images/jeans.jpg" alt="">-->
-                <span class="product">Metric 1 </span>
-              </a>
-              <span class="price"></span>
-            </li>
-            <li>
-              <a href="#">
-               <!-- <img src="images/nike.jpg" alt="">-->
-                <span class="product">Metric 2</span>
-              </a>
-              <span class="price"></span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/scarves.jpg" alt="">-->
-                <span class="product">Metric 3</span>
-              </a>
-              <span class="price"></span>
-            </li>
-            
-            </ul>
-          </div>
-          <div class="top-sales box">
-            <div class="title">Whatever we call this</div>
-            <ul class="top-sales-details">
-              <li>
-              <a href="#">
-                <!--<img src="images/sunglasses.jpg" alt="">-->
-                <span class="product">Some data chart here</span>
-              </a>
-              <span class="price"></span>
-            </li>
-            <li>
-              <a href="#">
-                 <!--<img src="images/jeans.jpg" alt="">-->
-                <span class="product">Metric 1 </span>
-              </a>
-              <span class="price"></span>
-            </li>
-            <li>
-              <a href="#">
-               <!-- <img src="images/nike.jpg" alt="">-->
-                <span class="product">Metric 2</span>
-              </a>
-              <span class="price"></span>
-            </li>
-            <li>
-              <a href="#">
-                <!--<img src="images/scarves.jpg" alt="">-->
-                <span class="product">Metric 3</span>
-              </a>
-              <span class="price"></span>
-            </li>
-            
-            </ul>
-          </div>
+        	<div class="title">Tickets By Type</div>
+            	<canvas id="typeChart" width="600" height="400"></canvas>
+        </div>
+       
       </div>
     </div>
   </section>
 
-  <script>
-   let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".sidebarBtn");
-sidebarBtn.onclick = function() {
-  sidebar.classList.toggle("active");
-  if(sidebar.classList.contains("active")){
-  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
-}else
-  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-}
- </script>
+ <script>
+ 	var newTicketStatusCount = [[${newTicketStatusCount}]];
+ 	var openTicketStatusCount = [[${openTicketStatusCount}]];
+ 	var	inProgressTicketStatusCount = [[${inProgressTicketStatusCount}]];
+ 	var resolvedTicketStatusCount = [[${resolvedTicketStatusCount}]];
+ 	var infoRequiredTicketStatusCount = [[${infoRequiredTicketStatusCount}]];
+ 	
+ 	var nonePriorityCount = [[${nonePriorityCount}]];
+ 	var lowPriorityCount = [[${lowPriorityCount}]];
+ 	var medPriorityCount = [[${medPriorityCount}]];
+ 	var highPriorityCount = [[${highPriorityCount}]];
+ 	
+ 	var requestTypeCount = [[${requestTypeCount}]];
+ 	var otherTypeCount = [[${otherTypeCount}]];
+ 	var bugTypeCount = [[${bugTypeCount}]];
+ 	
+	let sidebar = document.querySelector(".sidebar");
+	let sidebarBtn = document.querySelector(".sidebarBtn");
+	sidebarBtn.onclick = function() {
+	  sidebar.classList.toggle("active");
+	  if(sidebar.classList.contains("active")){
+	  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+	}else
+	  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+	}
+ </script> 
+ <script src="JS/graphs.js"></script>
+
 
 </body>
 </html>

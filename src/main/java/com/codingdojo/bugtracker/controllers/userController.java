@@ -1,5 +1,7 @@
 package com.codingdojo.bugtracker.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.codingdojo.bugtracker.models.LoginUser;
 import com.codingdojo.bugtracker.models.Project;
 import com.codingdojo.bugtracker.models.Ticket.TicketStatus;
+import com.codingdojo.bugtracker.models.Ticket.TicketType;
 import com.codingdojo.bugtracker.models.User;
 import com.codingdojo.bugtracker.services.ProjectService;
 import com.codingdojo.bugtracker.services.TicketService;
@@ -49,42 +52,119 @@ public class userController {
 			int adminUnassignedTicketCount = ticketServ.ticketCount(TicketStatus.NEW);
 			model.addAttribute("unassignedTicketCount", adminUnassignedTicketCount);
 			
+			//get Admin ticket status count
+			int newTicketStatusCount = ticketServ.getAdminTicketStatusCount(TicketStatus.NEW);
+			model.addAttribute("newTicketStatusCount", newTicketStatusCount);
 			
+			int openTicketStatusCount = ticketServ.getAdminTicketStatusCount(TicketStatus.OPEN);
+			model.addAttribute("openTicketStatusCount", openTicketStatusCount);
+			
+			int inProgressTicketStatusCount = ticketServ.getAdminTicketStatusCount(TicketStatus.IN_PROGRESS);
+			model.addAttribute("inProgressTicketStatusCount", inProgressTicketStatusCount);
+			
+			int resolvedTicketStatusCount = ticketServ.getAdminTicketStatusCount(TicketStatus.RESOLVED);
+			model.addAttribute("resolvedTicketStatusCount", resolvedTicketStatusCount);
+			
+			int infoRequiredTicketStatusCount = ticketServ.getAdminTicketStatusCount(TicketStatus.INFO_REQUIRED);
+			model.addAttribute("infoRequiredTicketStatusCount", infoRequiredTicketStatusCount);
+			
+			//get Admin ticket priority count
+			int nonePriorityCount = ticketServ.getAdminTicketPriorityCount(0);
+			model.addAttribute("nonePriorityCount", nonePriorityCount);
+			
+			int lowPriorityCount = ticketServ.getAdminTicketPriorityCount(1);
+			model.addAttribute("lowPriorityCount", lowPriorityCount);
+			
+			int medPriorityCount = ticketServ.getAdminTicketPriorityCount(2);
+			model.addAttribute("medPriorityCount", medPriorityCount);
+			
+			int highPriorityCount = ticketServ.getAdminTicketPriorityCount(3);
+			model.addAttribute("highPriorityCount", highPriorityCount);
+			
+			//get Admin ticket type count
+			int requestTypeCount = ticketServ.getAdminTicketTypeCount(TicketType.FEATURE_REQUESTS);
+			model.addAttribute("requestTypeCount", requestTypeCount);
+			
+			int otherTypeCount = ticketServ.getAdminTicketTypeCount(TicketType.OTHER_COMMENTS);
+			model.addAttribute("otherTypeCount", otherTypeCount);
+			
+			int bugTypeCount = ticketServ.getAdminTicketTypeCount(TicketType.BUGS_AND_ERRORS);
+			model.addAttribute("bugTypeCount", bugTypeCount);
+		}
+		else if(session.getAttribute("user_role").equals(1)) {
+			HashMap<String, Integer> counts = ticketServ.projectManagerCounts((Long) session.getAttribute("user_id"));
+			
+			
+			model.addAttribute("newTicketStatusCount", counts.get("newTicket"));
+			model.addAttribute("openTicketStatusCount", counts.get("openTicket"));
+			model.addAttribute("inProgressTicketStatusCount", counts.get("inProgressTicket"));
+			model.addAttribute("infoRequiredTicketStatusCount", counts.get("infoRequiredTicket"));
+			model.addAttribute("resolvedTicketStatusCount", counts.get("resolvedTicket"));
+			model.addAttribute("resolvedTicketCount", counts.get("resolvedTicket"));
+			model.addAttribute("openTicketCount", counts.get("unresolvedTicket"));
+			model.addAttribute("nonePriorityCount", counts.get("noPriorityTicket"));
+			model.addAttribute("lowPriorityCount", counts.get("lowPriorityTicket"));
+			model.addAttribute("medPriorityCount", counts.get("medPriorityTicket"));
+			model.addAttribute("highPriorityCount", counts.get("highPriorityTicket"));
+			model.addAttribute("requestTypeCount", counts.get("requestTypeTicket"));
+			model.addAttribute("otherTypeCount", counts.get("otherTypeTicket"));
+			model.addAttribute("bugTypeCount", counts.get("bugTypeTicket"));
+
 		}
 		else {
-			//get project count and send to jsp
-			int projectCount = userServ.countUsersProjects((Long) session.getAttribute("user_id"));
-			model.addAttribute("projectCount", projectCount);
-			
 			//get unresolved ticket count and send to jsp
 			int ticketCount = userServ.unresolvedAssignedTicketCount((Long) session.getAttribute("user_id"));
 			model.addAttribute("openTicketCount", ticketCount);
 			
 			//get resolved ticket count and send to jsp
-			int resolvedTicketCount = userServ.resolvedAssignedTicketCount((Long) session.getAttribute("user_id"));
+			int resolvedTicketCount = userServ.resolvedAssignedTicketCount((Long) session.getAttribute("user_id")); 
 			model.addAttribute("resolvedTicketCount", resolvedTicketCount);
 			
+			//get Dev ticket status count
+			int newTicketStatusCount = ticketServ.getDevTicketStatusCount(TicketStatus.NEW, (Long) session.getAttribute("user_id"));
+			model.addAttribute("newTicketStatusCount", newTicketStatusCount);
+			
+			int openTicketStatusCount = ticketServ.getDevTicketStatusCount(TicketStatus.OPEN, (Long) session.getAttribute("user_id"));
+			model.addAttribute("openTicketStatusCount", openTicketStatusCount);
+			
+			int inProgressTicketStatusCount = ticketServ.getDevTicketStatusCount(TicketStatus.IN_PROGRESS, (Long) session.getAttribute("user_id"));
+			model.addAttribute("inProgressTicketStatusCount", inProgressTicketStatusCount);
+			
+			int resolvedTicketStatusCount = ticketServ.getDevTicketStatusCount(TicketStatus.RESOLVED, (Long) session.getAttribute("user_id"));
+			model.addAttribute("resolvedTicketStatusCount", resolvedTicketStatusCount);
+			
+			int infoRequiredTicketStatusCount = ticketServ.getDevTicketStatusCount(TicketStatus.INFO_REQUIRED, (Long) session.getAttribute("user_id"));
+			model.addAttribute("infoRequiredTicketStatusCount", infoRequiredTicketStatusCount);
+			
+			//get Dev ticket priority count
+			int nonePriorityCount = ticketServ.getDevTicketPriorityCount(0, (Long) session.getAttribute("user_id"));
+			model.addAttribute("nonePriorityCount", nonePriorityCount);
+			
+			int lowPriorityCount = ticketServ.getDevTicketPriorityCount(1, (Long) session.getAttribute("user_id"));
+			model.addAttribute("lowPriorityCount", lowPriorityCount);
+			
+			int medPriorityCount = ticketServ.getDevTicketPriorityCount(2, (Long) session.getAttribute("user_id"));
+			model.addAttribute("medPriorityCount", medPriorityCount);
+			
+			int highPriorityCount = ticketServ.getDevTicketPriorityCount(3, (Long) session.getAttribute("user_id"));
+			model.addAttribute("highPriorityCount", highPriorityCount);
+			
+			//get Dev ticket type count
+			int requestTypeCount = ticketServ.getDevTicketTypeCount(TicketType.FEATURE_REQUESTS, (Long) session.getAttribute("user_id"));
+			model.addAttribute("requestTypeCount", requestTypeCount);
+			
+			int otherTypeCount = ticketServ.getDevTicketTypeCount(TicketType.OTHER_COMMENTS, (Long) session.getAttribute("user_id"));
+			model.addAttribute("otherTypeCount", otherTypeCount);
+			
+			int bugTypeCount = ticketServ.getDevTicketTypeCount(TicketType.BUGS_AND_ERRORS, (Long) session.getAttribute("user_id"));
+			model.addAttribute("bugTypeCount", bugTypeCount);
+			 
 		}
 		//get count of tickets submitted by user that are still open
 		int submittedTicketCount = ticketServ.ticketCount(TicketStatus.RESOLVED, (Long) session.getAttribute("user_id"));
 		model.addAttribute("submittedTicketCount", submittedTicketCount);
 		
-		//get count of tickets by type
-		//new
-		int newCount = ticketServ.ticketCount(TicketStatus.NEW);
-		model.addAttribute("newCount", newCount);
-		//open
-		int openCount = ticketServ.ticketCount(TicketStatus.OPEN);
-		model.addAttribute("openCount", openCount);
-		//in progress
-		int inprogressCount = ticketServ.ticketCount(TicketStatus.IN_PROGRESS);
-		model.addAttribute("inprogressCount", inprogressCount);
-		//add info
-		int addInfoCount = ticketServ.ticketCount(TicketStatus.INFO_REQUIRED);
-		model.addAttribute("addInfoCount", addInfoCount);
 		
-		int totalCount = newCount + openCount + inprogressCount+ addInfoCount;
-		model.addAttribute("totalCount", totalCount);
 		
 		return "dashboard.jsp";
 	}
@@ -114,6 +194,17 @@ public class userController {
 		return "redirect:/";
 		
 	}
+	@RequestMapping("/login/demo/admin")
+	public String loginAdmin(HttpSession session) {
+		User user = userServ.loginAdmin();
+		
+		//add to session
+		session.setAttribute("user_id", user.getId());
+		session.setAttribute("user_role", user.getRole());
+		session.setAttribute("user_name", user.getName());
+		return "redirect:/";
+	}
+	
 	
 	@RequestMapping("/register")
 	public String registrationForm(Model model) {
@@ -149,5 +240,11 @@ public class userController {
 		session.removeAttribute("user_name");
 		return "redirect:/login";
 		
+	}
+	@RequestMapping("/user/roles")
+	public String showRoles(Model model) {
+		List<User> users = userServ.getAllUsers();
+		model.addAttribute("users", users);
+		return "management.jsp";
 	}
 }

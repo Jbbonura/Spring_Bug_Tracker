@@ -84,6 +84,11 @@ public class UserService {
 			
 			return user;
 		}
+		//Demo Login Admin
+		public User loginAdmin() {
+			User user = this.findUserByEmail("demoAdmin@gmail.com");
+			return user;
+		}
 		
 	//READ
 	
@@ -139,53 +144,58 @@ public class UserService {
 			}
 			return count;
 		}
-	//Retrieve users unresolved tickets
-		public List<Ticket> unresolvedAssignedTickets(Long id){
-			//fetch users tickets
+		/*
+		 * //Retrieve users unresolved tickets public List<Ticket>
+		 * unresolvedAssignedTickets(Long id){ //fetch users tickets User user =
+		 * getOneUser(id); List<Ticket> assignedTickets = user.getAssignedTickets(); int
+		 * index = 0; for (Ticket ticket : assignedTickets) { if
+		 * (ticket.getTicketStatus() == TicketStatus.RESOLVED) {
+		 * assignedTickets.remove(index); } index++; } return assignedTickets; } //Count
+		 * of unresolved tickets public int unresolvedAssignedTicketCount(Long id){
+		 * List<Ticket> assignedTickets = unresolvedAssignedTickets(id); int count = 0;
+		 * for (Ticket ticket : assignedTickets) { count++; } return count; }
+		 */
+		
+		//retrieve and count unresolved tickets
+		public int unresolvedAssignedTicketCount(Long id) {
 			User user = getOneUser(id);
-			List<Ticket> assignedTickets = user.getAssignedTickets(); 
-			int index = 0;
-			for (Ticket ticket : assignedTickets) {
-				if (ticket.getTicketStatus() == TicketStatus.RESOLVED) {
-					assignedTickets.remove(index);
-				}
-				index++;
-			}
-			return assignedTickets;
-		}
-	//Count of unresolved tickets
-		public int unresolvedAssignedTicketCount(Long id){
-			List<Ticket> assignedTickets = unresolvedAssignedTickets(id);
+			List<Ticket> assignedTickets = user.getAssignedTickets();
+			
+			//count unresolvedtickets
 			int count = 0;
-			for (Ticket ticket : assignedTickets) {
-				count++;
+			for(Ticket ticket: assignedTickets) {
+				if(ticket.getTicketStatus() != TicketStatus.RESOLVED) {
+					count++;
+				}
 			}
 			return count;
 		}
 		
-		//retreive users resolved tickets
-		public List<Ticket> resolvedAssignedTickets(Long id) {
-			//fetch users tickets
+		/*
+		 * //retreive users resolved tickets public List<Ticket>
+		 * resolvedAssignedTickets(Long id) { //fetch users tickets User user =
+		 * getOneUser(id); List<Ticket> assignedTickets = user.getAssignedTickets();
+		 * 
+		 * //remove all tickets not finished int index = 0; for(Ticket ticket :
+		 * assignedTickets) { if (ticket.getTicketStatus() != TicketStatus.RESOLVED) {
+		 * assignedTickets.remove(index); } index++; } return assignedTickets; }
+		 * 
+		 * //Count resolved tickets public int resolvedAssignedTicketCount(Long id) {
+		 * List<Ticket> assignedTickets = resolvedAssignedTickets(id); int count = 0;
+		 * for (Ticket ticket : assignedTickets) { count++; } return count; }
+		 */
+		
+		//retrieve and count resolved tickets
+		public int resolvedAssignedTicketCount(Long id) {
 			User user = getOneUser(id);
 			List<Ticket> assignedTickets = user.getAssignedTickets();
 			
-			//remove all tickets not finished
-			int index = 0;
-			for(Ticket ticket : assignedTickets) {
-				if (ticket.getTicketStatus() != TicketStatus.RESOLVED) {
-					assignedTickets.remove(index);
-				}
-				index++;
-			}
-			return assignedTickets;
-		}
-		
-		//Count resolved tickets
-		public int resolvedAssignedTicketCount(Long id) {
-			List<Ticket> assignedTickets = resolvedAssignedTickets(id);
+			//count resolved tickets
 			int count = 0;
-			for (Ticket ticket : assignedTickets) {
-				count++;
+			for(Ticket ticket : assignedTickets) {
+				if(ticket.getTicketStatus() == TicketStatus.RESOLVED) {
+					count++;
+				}
 			}
 			return count;
 		}

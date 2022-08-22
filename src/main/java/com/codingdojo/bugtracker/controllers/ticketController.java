@@ -113,6 +113,10 @@ public class ticketController {
 			List<Ticket> tickets = user.getAssignedTickets();
 					model.addAttribute("tickets", tickets);
 		}
+		else {
+			List<Ticket> tickets = ticketServ.getTicketBySubmitter((Long) session.getAttribute("user_id"));
+			model.addAttribute("tickets", tickets);
+		}
 //		else {
 //			List<Ticket> tickets = user.getSubmittingUsers();
 //			model.addAttribute("tickets", tickets);
@@ -160,8 +164,25 @@ public class ticketController {
 			filledTicket.setTicketStatus(TicketStatus.OPEN);
 		}
 		// no validation needed
+		//preserve comments
+		List<Comment> comments = commentServ.getCommentsByTicket(id);
 		
-		ticketServ.createTicket(filledTicket);
+		for(Comment comment : comments) {
+			String text = comment.getCommentText();
+			System.out.println(text);
+		}
+		
+		Ticket ticket = ticketServ.createTicket(filledTicket);
+		
+		for(Comment comment : comments) {
+			Comment newComment = new Comment();
+			newComment.setCommentedTicket(ticket);
+			newComment.setCommentingUser(comment.getCommentingUser());
+			newComment.setCommentText(comment.getCommentText());
+			
+			
+			commentServ.createComment(newComment);
+		}
 		return "redirect:/tickets";
 	}
 	
