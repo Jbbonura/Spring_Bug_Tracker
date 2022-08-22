@@ -20,4 +20,7 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Query("SELECT u FROM User u WHERE role = 1 OR role = 2")
 	List<User> getDevs();
 	
+	@Query("SELECT count(*) FROM User")
+	int userCount();
+	
 }

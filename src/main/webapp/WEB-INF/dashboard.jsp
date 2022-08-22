@@ -30,18 +30,12 @@
             <span class="links_name">Dashboard Home</span>
           </a>
         </li>
-        <!-- <li> 
+        <li> 
           <a href="/user/roles">
             <i class='bx bxs-user-detail' ></i>
             <span class="links_name">Manage Role Assignment</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class='bx bxs-user-badge' ></i>
-            <span class="links_name">Manage Project Users</span>
-          </a>
-        </li> -->
         <li>
           <a href="/projects">
             <i class='bx bx-list-ol' ></i>
@@ -54,18 +48,6 @@
             <span class="links_name">My Tickets</span>
           </a>
         </li>
-        <!-- <li>
-          <a href="#">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">User Profile</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bxl-microsoft-teams' ></i>
-            <span class="links_name">Team</span>
-          </a>
-        </li> -->
         <li class="log_out">
           <a href="/logout">
             <i class='bx bx-log-out'></i>
@@ -113,46 +95,26 @@
 	      	<div class="box">
 	          <div class="right-side">
 	            <div class="box-topic">Total Projects</div>
-	            <div class="number"><c:out value="${projectCount}"/></div> <!--NEED TO ADD COUNTER, ADD NEW ICON-->
-	            <div class="indicator">
-	              <i class='bx bx-up-arrow-alt'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
+	            <div class="number"><c:out value="${projectCount}"/></div>
 	          </div>
-	          <!-- <i class='bx bx-cart-alt cart'></i> -->
 	        </div>
 	        <div class="box">
 	          <div class="right-side">
 	            <div class="box-topic">Total Unresolved Tickets</div>
 	            <div class="number"><c:out value="${openTicketCount}"/></div>
-	            <div class="indicator">
-	              <i class='bx bx-up-arrow-alt'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
 	          </div>
-	          <!-- <i class='bx bxs-cart-add cart two' ></i> -->
 	        </div>
 	        <div class="box">
 	          <div class="right-side">
 	            <div class="box-topic">Total Unassigned Tickets</div>
 	            <div class="number"><c:out value="${unassignedTicketCount}"/></div>
-	            <div class="indicator">
-	              <i class='bx bx-up-arrow-alt'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
 	          </div>
-	          <!-- <i class='bx bx-cart cart three' ></i> -->
 	        </div>
 	        <div class="box">
 	          <div class="right-side">
 	            <div class="box-topic">Your Unresolved Tickets</div>
 	            <div class="number"><c:out value="${submittedTicketCount}"/></div>
-	            <div class="indicator">
-	              <i class='bx bx-down-arrow-alt down'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
 	          </div>
-	          <!-- <i class='bx bxs-cart-download cart four' ></i> -->
 	        </div>
 	      </c:when>
 	      <c:otherwise>
@@ -160,34 +122,19 @@
 	          <div class="right-side">
 	            <div class="box-topic">My Unresolved Tickets</div>
 	            <div class="number"><c:out value="${openTicketCount}"/></div>
-	            <div class="indicator">
-	              <i class='bx bx-up-arrow-alt'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
 	          </div>
-	          <!-- <i class='bx bxs-cart-add cart two' ></i> -->
 	        </div>
 	        <div class="box">
 	          <div class="right-side">
 	            <div class="box-topic">My Resolved Tickets</div>
 	            <div class="number"><c:out value="${resolvedTicketCount}"/></div>
-	            <div class="indicator">
-	              <i class='bx bx-up-arrow-alt'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
 	          </div>
-	          <!-- <i class='bx bx-cart cart three' ></i> -->
 	        </div>
 	        <div class="box">
 	          <div class="right-side">
 	            <div class="box-topic">My Submitted Unresolved Tickets</div>
 	            <div class="number"><c:out value="${submittedTicketCount}"/></div>
-	            <div class="indicator">
-	              <i class='bx bx-down-arrow-alt down'></i>
-	              <span class="text">Some performance metric</span>
-	            </div>
 	          </div>
-	          <!-- <i class='bx bxs-cart-download cart four' ></i> -->
 	        </div>
 	      </c:otherwise>
 	   </c:choose>

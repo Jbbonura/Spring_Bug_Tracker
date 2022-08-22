@@ -47,7 +47,6 @@ public class User {
 	private String password;
 	
 	@Transient
-	@NotNull(message="Confirm Password is required.")
 	private String confirm;
 	
 	@Max(3)

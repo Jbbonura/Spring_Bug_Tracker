@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingdojo.bugtracker.models.LoginUser;
@@ -205,6 +207,28 @@ public class userController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/login/demo/pm")
+	public String loginPM(HttpSession session) {
+		User user = userServ.loginPM();
+		
+		//add to session
+		session.setAttribute("user_id", user.getId());
+		session.setAttribute("user_role", user.getRole());
+		session.setAttribute("user_name", user.getName());
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/login/demo/dev")
+	public String loginDev(HttpSession session) {
+		User user = userServ.loginDev();
+		
+		//add to session
+		session.setAttribute("user_id", user.getId());
+		session.setAttribute("user_role", user.getRole());
+		session.setAttribute("user_name", user.getName());
+		return "redirect:/";
+	}
+	
 	
 	@RequestMapping("/register")
 	public String registrationForm(Model model) {
@@ -246,5 +270,26 @@ public class userController {
 		List<User> users = userServ.getAllUsers();
 		model.addAttribute("users", users);
 		return "management.jsp";
+	}
+	@RequestMapping("/user/{id}")
+	public String editUser(
+			@PathVariable("id") Long id,
+			HttpSession session,
+			Model model) {
+		User user = userServ.getOneUser(id);
+		model.addAttribute("user", user);
+		return "userEdit.jsp";
+	}
+	
+	@PutMapping("/user/{id}")
+	public String updateUser(
+			@Valid @ModelAttribute("user") User filledUser,
+			BindingResult result,
+			@PathVariable("id") Long id) {
+		//no validation needed
+		//Update user
+		User user = userServ.save(filledUser);
+		
+		return "redirect:/user/roles";
 	}
 }

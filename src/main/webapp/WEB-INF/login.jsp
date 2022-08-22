@@ -40,6 +40,12 @@
                 <div class="button">
                 	<a href="/login/demo/admin">Demo Admin Login</a>
                 </div>
+                <div class="button">
+                	<a href="/login/demo/pm">Demo Project Manager Login</a>
+                </div>
+                <div class="button">
+                	<a href="/login/demo/dev">Demo Developer Login</a>
+                </div>
                 <div class="login-signup">
                     <span class="text">No Account?
                         <a href="/register" class="text signup-link">Register now</a>

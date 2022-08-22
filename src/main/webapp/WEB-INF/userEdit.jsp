@@ -57,7 +57,7 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Details for ${project.name} </span>
+        <span class="dashboard">Details for ${user.name} </span>
       </div>
       <div class="profile-details">
       	<c:if test="${user_role == 3}">
@@ -76,63 +76,47 @@
     </nav>
 
     <div class="home-content">
-      <div class="overview-boxes">
-        <div class="box">
-          <div class="right-side">
-          <div class="box-topic">Project Name</div>
-            <span class="text"><c:out value="${project.name}"/></span>
-          </div>
-        </div>
-        <div class="box">
-          <div class="right-side">
-            <div class="box-topic">Project Description</div>
-            <span class="text"><c:out value="${project.description}"/></span>
-          </div>
-        </div>
-      </div>
       <div class="bottom-boxes">
-        <div class="top-sales">
-          <div class="table-header">
-            <div class="title">Assigned Manager</div>
-            
-          </div>
-          <div style="overflow-x:auto;" class="ticket-comments">
-            <table style="width: 100%;" class="table-content"  id="assigned">
-                <h3><c:out value="${manager.name}"/></h3>
-            </table>  
-          </div>
-        </div>
+        
           <div class="top-sales">
             <div class="table-header">
-              <div class="title">Tickets for this Project</div>
-              <div class="search-box">
-                <i class='bx bx-search' ></i>
-                <input id='myInput' onkeyup='searchTable()' type='text' placeholder="Search">
-              </div>
+              <div class="title">${user.name}'s info</div>
             </div>
-            <div style="overflow-x:auto;" class="ticket-comments">
-              <table style="width: 100%;" class="table-content"  id="project-tickets">
-                  <thead>
-                      <tr class="table100-head">
-                          <th style="width:15%;"class="column1">Title</th>
-                          <th style="width:15%;" class="column2">Submitter</th>
-                          <th style="width:15%;" class="column3">Assigned Developer</th>
-                          <th style="width:15%;"class="column4">Status</th>
-                          <th style="width:15%;"class="column5">Created</th>
-                      </tr>  
-                  </thead>
-                  <tbody>
-                    	<c:forEach var="ticket" items="${tickets}">
-                    		<tr>
-                    			<td><c:out value="${ticket.title}"/></td>
-                    			<td><c:out value="${ticket.submitter.name}"/></td>
-                    			<td><c:out value="${ticket.assignedDev.name}"/></td>
-                    			<td><c:out value="${ticket.ticketStatus}"/></td>
-                    			<td><fmt:formatDate type="date" value="${ticket.createdAt}"/></td>
-                    		</tr>
-                    	</c:forEach>
-                  </tbody>
-              </table>  
+            <div style="overflow-x:auto;" class="ticket-comments"> 
+            	<form:form action="#" method="post" modelAttribute="user">
+            		<input type="hidden" name="_method" value="put">
+            		<form:hidden path="id" value="${user.id}"/>
+            		<form:hidden path="password" value="${user.password}"/>
+            		<div class="user-details">
+            			<div class="input-box" style="margin-bottom: 20px;">
+	            			<p>
+	            				Name: <c:out value="${user.name}"/>
+	            				<form:hidden path="name" value="${user.name}"/>
+	            			</p>
+            			</div>
+            			<div class="input-box" style="margin-bottom: 20px;">
+            				<p>
+            					Email: <c:out value="${user.email}"/>
+            					<form:hidden path="email" value="${user.email}"/>
+            				</p>
+            			</div>
+            			<div class="input-box" style="margin-bottom: 20px;">
+            				<p>
+            					Role:
+            					<form:select path="role">
+            						<form:option value="0">Admin</form:option>
+            						<form:option value="1">Project Manager</form:option>
+            						<form:option value="2">Developer</form:option>
+            						<form:option value="3">Submitter</form:option>
+            					</form:select>
+            				</p>
+            			</div>
+            			<div class="button">
+            				<input type="submit" value="Edit">
+            			</div>
+            		</div>
+            		
+            	</form:form>
             </div>
           </div>
       </div> <!--bottom boxes end -->
