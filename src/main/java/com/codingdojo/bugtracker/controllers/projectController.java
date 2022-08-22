@@ -143,14 +143,6 @@ public class projectController {
 		List<Ticket> tickets = ticketServ.getTicketByProject(id);
 		model.addAttribute("tickets", tickets);
 		
-//		//get project unresolved ticket count
-//		int unresolvedTicketCount = projectServ.unresolvedProjectTicketCount(id);
-//		model.addAttribute("unresolvedTicketCount", unresolvedTicketCount);
-//		
-//		//get project resolved ticket count
-//		int resolvedTicketCount = projectServ.resolvedProjectTicketCount(id);
-//		model.addAttribute("resolvedTicketCount", resolvedTicketCount);
-		
 		return "project.jsp";
 	}
 	

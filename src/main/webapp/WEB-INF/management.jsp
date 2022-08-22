@@ -62,7 +62,6 @@
       </div>
       
       <div class="profile-details">
-        <!--<img src="images/profile.jpg" alt="">-->
         <c:if test="${user_role == 3}">
         	<span class="admin_name">Logged in as a Submitter</span>
         </c:if>

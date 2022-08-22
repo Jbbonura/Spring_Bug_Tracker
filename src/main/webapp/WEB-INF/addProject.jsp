@@ -26,18 +26,14 @@
           <span class="links_name">Dashboard Home</span>
         </a>
       </li>
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-box' ></i>
-          <span class="links_name">Manage Role Assignment</span>
-        </a>
-      </li> 
-      <li>
-        <a href="#">
-          <i class='bx bx-list-ul' ></i>
-          <span class="links_name">Manage Project Users</span>
-        </a>
-      </li> -->
+      <c:if test= "${user_role == 0}">
+	        <li> 
+	          <a href="/user/roles">
+	            <i class='bx bxs-user-detail' ></i>
+	            <span class="links_name">Manage Role Assignment</span>
+	          </a>
+	        </li>
+        </c:if>
       <li>
         <a href="/projects">
           <i class='bx bx-pie-chart-alt-2' ></i>
@@ -50,18 +46,6 @@
           <span class="links_name">My Tickets</span>
         </a>
       </li>
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-book-alt' ></i>
-          <span class="links_name">User Profile</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-user' ></i>
-          <span class="links_name">Team</span>
-        </a>
-      </li> -->
       <li class="log_out">
         <a href="/logout">
           <i class='bx bx-log-out'></i>
@@ -80,7 +64,6 @@
       </div>
       
       <div class="profile-details">
-        <!--<img src="images/profile.jpg" alt="">-->
         <c:if test="${user_role == 3}">
         	<span class="admin_name">Logged in as a Submitter</span>
         </c:if>

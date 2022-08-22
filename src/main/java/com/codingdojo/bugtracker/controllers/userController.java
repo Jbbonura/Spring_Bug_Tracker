@@ -266,7 +266,13 @@ public class userController {
 		
 	}
 	@RequestMapping("/user/roles")
-	public String showRoles(Model model) {
+	public String showRoles(Model model, HttpSession session) {
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+		if(!session.getAttribute("user_role").equals(0)) {
+			return "redirect:/";
+		}
 		List<User> users = userServ.getAllUsers();
 		model.addAttribute("users", users);
 		return "management.jsp";
@@ -276,6 +282,12 @@ public class userController {
 			@PathVariable("id") Long id,
 			HttpSession session,
 			Model model) {
+		if(session.getAttribute("user_id") == null) {
+			return "redirect:/login";
+		}
+		if(!session.getAttribute("user_role").equals(0)) {
+			return "redirect:/";
+		}
 		User user = userServ.getOneUser(id);
 		model.addAttribute("user", user);
 		return "userEdit.jsp";

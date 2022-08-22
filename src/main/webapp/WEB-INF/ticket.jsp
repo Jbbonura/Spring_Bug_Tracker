@@ -27,18 +27,14 @@
           <span class="links_name">Dashboard Home</span>
         </a>
       </li>
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-user-plus' ></i>
-          <span class="links_name">Manage Role Assignment</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bxs-user-detail' ></i>
-          <span class="links_name">Manage Project Users</span>
-        </a>
-      </li> -->
+      <c:if test= "${user_role == 0}">
+	        <li> 
+	          <a href="/user/roles">
+	            <i class='bx bxs-user-detail' ></i>
+	            <span class="links_name">Manage Role Assignment</span>
+	          </a>
+	        </li>
+        </c:if>
       <li>
         <a href="/projects">
           <i class='bx bx-list-ol' ></i>
@@ -51,18 +47,7 @@
           <span class="links_name">My Tickets</span>
         </a>
       </li>
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-user' ></i>
-          <span class="links_name">User Profile</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bxl-microsoft-teams' ></i>
-          <span class="links_name">Team</span>
-        </a>
-      </li> -->
+      
       <li class="log_out">
         <a href="/logout">
           <i class='bx bx-log-out'></i>
