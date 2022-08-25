@@ -23,6 +23,6 @@ public class BugTrackerApplication {
         tomcat.addAdditionalTomcatConnectors(ajpConnector);
         return tomcat;
     }
-}
+} 
 
 
